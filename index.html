@@ -191,6 +191,7 @@
 				</label>
 				<br/>
 				<label>
+					<input type="checkbox" id="item-type-apply" />
 					Item type?
 					<select id="item-type">
 						<option>Other</option>
@@ -298,7 +299,8 @@
 				if( document.getElementById("show-found-apply").checked )
 					filterLostThatHaveBeenFound(showFound)
 				
-				filterType(iType)
+				if( document.getElementById("item-type-apply").checked )
+					filterType(iType)
 
 				var colorInputs = document.getElementsByName("colors")
 				var colors = []
@@ -339,7 +341,6 @@
 
 				for (var i = 0; i < lostRows.length; i++) {
 					var location = lostRows[i].cells[lostLocationColumn].textContent
-					console.log(location)
 					if ( locations.indexOf(location) == -1 ) //no matches
 						lostRows[i].className = getHideClass(lostRows[i].className,"hide")
 					else
