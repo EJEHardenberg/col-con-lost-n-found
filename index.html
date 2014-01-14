@@ -54,6 +54,42 @@
 					</select>
 				</label>
 
+				<fieldset>
+					<legend>Colors</legend>
+						<label>
+							<input type="checkbox" name="colors" value="Black" />
+							Black
+						</label>
+						<label>
+							<input type="checkbox" name="colors" value="White" />
+							White
+						</label>
+						<label>
+							<input type="checkbox" name="colors" value="Blue" />
+							Blue
+						</label>
+						<label>
+							<input type="checkbox" name="colors" value="Yellow" />
+							Yellow
+						</label>
+						<label>
+							<input type="checkbox" name="colors" value="Green" />
+							Green
+						</label>
+						<label>
+							<input type="checkbox" name="colors" value="Red" />
+							Red
+						</label>
+						<label>
+							<input type="checkbox" name="colors" value="Purple" />
+							Purple
+						</label>	
+						<label>
+							<input type="checkbox" name="colors" value="Grey" />
+							Grey
+						</label>
+				</fieldset>
+
 				<button id="search" type="button">Search</button>
 			</form>
 		</section>
@@ -72,7 +108,6 @@
 
 			document.getElementById("search").onclick = function(){
 				var iType = document.getElementById("item-type").value
-
 				var lostTable = document.getElementById("lost-items").tBodies[0].rows
 				var foundTable = document.getElementById("found-items").tBodies[0].rows
 
@@ -85,13 +120,75 @@
 				};
 
 				filterType(iType)
+
+				var colorInputs = document.getElementsByName("colors")
+				var colors = []
+				for (var i = colorInputs.length - 1; i >= 0; i--) {
+					if( colorInputs[i].checked )
+						colors.push( colorInputs[i].value )
+				};
+				if(colors.length > 0)
+					filterColor(colors.sort())
 			}
 
-			/* If it's already a match by some filter than keep it! */
+			/* If it's not a match by some filter than toss it! */
 			function getHideClass(currentClass, desiredClass){
-				if(currentClass.indexOf("match") == -1 )
+				if(currentClass.indexOf("hide") == -1 )
 					return desiredClass
 				return currentClass
+			}
+
+
+			function intersect_safe(a, b){
+			  var ai=0, bi=0;
+			  var result = new Array();
+
+			  while( ai < a.length && bi < b.length ){
+			     if      (a[ai] < b[bi] ){ ai++; }
+			     else if (a[ai] > b[bi] ){ bi++; }
+			     else /* they're equal */{
+			       result.push(a[ai]);
+			       ai++;
+			       bi++;
+			     }
+			  }
+
+			  return result;
+			}
+
+			function filterColor(colors){
+				var lostTable = document.getElementById("lost-items")
+				var foundTable = document.getElementById("found-items")
+				var lostRows = lostTable.tBodies[0].rows
+				var foundRows = foundTable.tBodies[0].rows
+
+				var lostColorColumn = 4
+				var foundColorColumn = 5
+
+				for (var i = 0; i < lostRows.length; i++) {
+					var rowColors = lostRows[i].cells[lostColorColumn].textContent.split(",")
+					for (var j = rowColors.length - 1; j >= 0; j--) {
+						rowColors[j] = rowColors[j].trim()
+					};
+
+					if ( intersect_safe(colors, rowColors).length == 0 ) //no matches
+						lostRows[i].className = getHideClass(lostRows[i].className,"hide")
+					else
+						lostRows[i].className = getHideClass(lostRows[i].className, "match")
+					
+				};
+				for (var i = 0; i < foundRows.length; i++) {
+					var rowColors = foundRows[i].cells[foundColorColumn].textContent.split(",")
+					for (var j = rowColors.length - 1; j >= 0; j--) {
+						rowColors[j] = rowColors[j].trim()
+					};
+					if ( intersect_safe(colors, rowColors).length == 0 ) //no matches
+						foundRows[i].className = getHideClass(foundRows[i].className,"hide")
+					else
+						foundRows[i].className = getHideClass(foundRows[i].className, "match")
+					
+				};
+
 			}
  
  			/* Filter by item type */
@@ -141,7 +238,6 @@
 					};
 					for (var i = foundRows.length - 1; i >= 0; i--) {
 						var lType = foundRows[i].cells[foundTypeColumn].textContent
-						console.log(lType)
 						switch ( lType ){
 							case val:
 								foundRows[i].className = getHideClass(foundRows[i].className, "match")
@@ -153,7 +249,6 @@
 				}
 			}
 
-			document
 
 			document.getElementById("load-lost").onclick = function loadDataButton(evt){
 
@@ -188,6 +283,13 @@
 			/* Load the data via callback into the two DOM elements */
 			function loadData(csv,id){
 				var data = CSVToArray(csv,",")
+				var lostColorColumn = 4
+				var foundColorColumn = 5
+				var sortCol
+				if(id == "lost-items")
+					sortCol = lostColorColumn
+				else
+					sortCol = foundColorColumn
 
 				/* Create the lost table that we'll search through */
 				var table = document.getElementById(id)
@@ -208,6 +310,9 @@
 				for (var i = 1; i < data.length; i++) {
 					var tr = document.createElement("tr")
 					for (var j = 0; j < data[i].length; j++) {
+						/*Sort the text if colors column*/
+						if(j == sortCol)
+							data[i][j] = data[i][j].split(",").map(function(item){return item.trim()}).sort().join(",")
 						var td = document.createElement("td")
 						var text = document.createTextNode(data[i][j])
 						td.appendChild(text)
