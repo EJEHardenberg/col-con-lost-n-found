@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Lost And Found Colossal Con</title>
+
+		<style type="text/css">
+			body{
+				background-color: #eee;
+			}
+			table{
+				margin: 0 auto;
+			}
+			#loadedLost, #loadedFound{
+				display: none;
+			}
+			/* Filter CSS */
+			.hide{
+				display: none;
+			}
+			.match{
+				display: table-row;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<h1>Lost &amp; Found Search Utility</h1>
+			<p>
+				Use the options below to search for an item based on its description. Click the two buttons below to load the data first though!
+			</p>
+			
+			<div>
+				<button id="load-lost">Load Data</button>	
+			</div>
+		</header>
+
+		<section>
+			<h2>Search Criteria</h2>
+			<p>
+				Narrow down the search by typing key words below (try a color or 3, an item type)
+			</p>
+			<form>
+				<!-- Search Options Here... enable once spreadsheet data loads -->
+				<label>
+					Item type?
+					<select id="item-type">
+						<option>Other</option>
+						<option>Badge</option>
+						<option>Camera</option>
+						<option>Bag</option>
+						<option>Phone</option>
+						<option>Clothing</option>
+					</select>
+				</label>
+
+				<button id="search" type="button">Search</button>
+			</form>
+		</section>
+
+		<section>
+			<h2>Lost Items</h2>
+			<table id="lost-items"></table>
+		</section>
+
+		<section>
+			<h2>Found Items</h2>
+			<table id="found-items"></table>
+		</section>
+
+		<script type="text/javascript">
+
+			document.getElementById("search").onclick = function(){
+				var iType = document.getElementById("item-type").value
+
+				var lostTable = document.getElementById("lost-items").tBodies[0].rows
+				var foundTable = document.getElementById("found-items").tBodies[0].rows
+
+				/*Clear Previous Filters and then search*/
+				for (var i = lostTable.length - 1; i >= 0; i--) {
+					lostTable[i].className = ""
+				};
+				for (var i = foundTable.length - 1; i >= 0; i--) {
+					foundTable[i].className = ""
+				};
+
+				filterType(iType)
+			}
+
+			/* If it's already a match by some filter than keep it! */
+			function getHideClass(currentClass, desiredClass){
+				if(currentClass.indexOf("match") == -1 )
+					return desiredClass
+				return currentClass
+			}
+ 
+ 			/* Filter by item type */
+			function filterType(val){
+				var lostTable = document.getElementById("lost-items")
+				var foundTable = document.getElementById("found-items")
+
+				var lostRows = lostTable.tBodies[0].rows
+				var foundRows = foundTable.tBodies[0].rows
+
+				/* The 4th Column for Lost Rows is for type */
+				var lostTypeColumn = 3 //4th column
+				var foundTypeColumn = 6 //7th column
+
+				if( val == "Other" ){
+					/* Loop through table rows hiding anything not an 'other' */
+					for (var i = lostRows.length - 1; i >= 0; i--) {
+						var lType = lostRows[i].cells[lostTypeColumn].textContent
+						switch ( lType ){
+							case "Badge": case "Camera": case "Bag": case "Phone": case "Clothing":
+							lostRows[i].className = getHideClass(lostRows[i].className,"hide")
+							break;
+							default:
+							lostRows[i].className = getHideClass(lostRows[i].className, "match")
+						}
+					};
+					for (var i = foundRows.length - 1; i >= 0; i--) {
+						var lType = foundRows[i].cells[foundTypeColumn].textContent
+						switch ( lType ){
+							case "Badge": case "Camera": case "Bag": case "Phone": case "Clothing":
+							foundRows[i].className = getHideClass(foundRows[i].className,"hide")
+							break;
+							default:
+							foundRows[i].className = getHideClass(foundRows[i].className, "match")
+						}
+					};
+				}else{
+					for (var i = lostRows.length - 1; i >= 0; i--) {
+						var lType = lostRows[i].cells[lostTypeColumn].textContent
+						switch ( lType ){
+							case val:
+								lostRows[i].className = getHideClass(lostRows[i].className, "match")
+							break;
+							default:
+								lostRows[i].className = getHideClass(lostRows[i].className,"hide")
+						}
+					};
+					for (var i = foundRows.length - 1; i >= 0; i--) {
+						var lType = foundRows[i].cells[foundTypeColumn].textContent
+						console.log(lType)
+						switch ( lType ){
+							case val:
+								foundRows[i].className = getHideClass(foundRows[i].className, "match")
+							break;
+							default:
+								foundRows[i].className = getHideClass(foundRows[i].className ,"hide")
+						}
+					};
+				}
+			}
+
+			document
+
+			document.getElementById("load-lost").onclick = function loadDataButton(evt){
+
+				var lostFormLink = "https://docs.google.com/spreadsheet/pub?key=0ApyDdTxMT4sPdEgtaFdyY25oM0lLeVZvZE54Q052V2c&single=true&gid=0&output=csv&alt=json-in-script&callback=loadLostData"
+
+				var xmlHttp = null
+				var ref = this;
+		    	xmlHttp = new XMLHttpRequest()
+		    	xmlHttp.onreadystatechange = function(){
+		    		if( xmlHttp.readyState == 4 ){
+		    			loadData(xmlHttp.response, "lost-items")
+		    		}
+		    	}
+		    	xmlHttp.open( "GET", lostFormLink , true )
+		    	xmlHttp.send( null )
+
+
+				var foundFormLink = "https://docs.google.com/spreadsheet/pub?key=0ApyDdTxMT4sPdGpuQWt5YXFGa19mWEhSeUZPdE5kMmc&single=true&gid=0&output=csv&alt=json-in-script&callback=loadFoundData"
+
+				var xmlHttp2 = null
+				var ref = this;
+		    	xmlHttp2 = new XMLHttpRequest()
+		    	xmlHttp2.onreadystatechange = function(){
+		    		if( xmlHttp2.readyState == 4 ){
+		    			loadData(xmlHttp2.response,"found-items")
+		    		}
+		    	}
+		    	xmlHttp2.open( "GET", foundFormLink , true )
+		    	xmlHttp2.send( null )
+			}
+
+			/* Load the data via callback into the two DOM elements */
+			function loadData(csv,id){
+				var data = CSVToArray(csv,",")
+
+				/* Create the lost table that we'll search through */
+				var table = document.getElementById(id)
+				
+				/* Table Head */
+				var thead = document.createElement("thead")
+				var theadTr = document.createElement("tr")
+				for (var i = 0; i < data[0].length; i++) {
+					var th = document.createElement("th")
+					var text = document.createTextNode(data[0][i])
+					th.appendChild(text)
+					theadTr.appendChild(th)
+				};
+				thead.appendChild(theadTr)
+
+				/* Table Row Data */
+				var tbody = document.createElement("tbody")
+				for (var i = 1; i < data.length; i++) {
+					var tr = document.createElement("tr")
+					for (var j = 0; j < data[i].length; j++) {
+						var td = document.createElement("td")
+						var text = document.createTextNode(data[i][j])
+						td.appendChild(text)
+						tr.appendChild(td)
+					};
+					tbody.appendChild(tr)
+				};
+
+				
+				table.innerHTML = ""
+				table.appendChild(thead)
+				table.appendChild(tbody)
+			}
+
+			// This will parse a delimited string into an array of
+		    // arrays. The default delimiter is the comma, but this
+		    // can be overriden in the second argument.
+		    function CSVToArray( strData, strDelimiter ){
+		    	strDelimiter = (strDelimiter || ",");
+		    	var objPattern = new RegExp((
+		    			// Delimiters.
+		    			"(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
+		    			// Quoted fields.
+		    			"(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+		    			// Standard fields.
+		    			"([^\"\\" + strDelimiter + "\\r\\n]*))"),"gi");
+		    	var arrData = [[]];
+		    	var arrMatches = null;
+		    	while (arrMatches = objPattern.exec( strData )){
+		    		var strMatchedDelimiter = arrMatches[ 1 ];
+		    		if (
+		    			strMatchedDelimiter.length &&
+		    			(strMatchedDelimiter != strDelimiter)
+		    			){
+		    			arrData.push( [] );
+		    		}
+		    		if (arrMatches[ 2 ]){
+		    			var strMatchedValue = arrMatches[ 2 ].replace(
+		    				new RegExp( "\"\"", "g" ),"\"");
+		    		} else {
+		    			var strMatchedValue = arrMatches[ 3 ];
+		    		}
+		    		arrData[ arrData.length - 1 ].push( strMatchedValue );
+		    	}
+		    	return( arrData );
+		    }
+
+		</script>
+	</body>
+</html>
