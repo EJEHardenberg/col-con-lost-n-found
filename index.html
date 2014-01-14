@@ -181,6 +181,15 @@
 			</p>
 			<form>
 				<!-- Search Options Here... enable once spreadsheet data loads -->
+				<label title="Check the box to apply the filter">
+					<input type="checkbox" id="show-found-apply" />
+					Show list items marked as 
+					<select id="show-found">
+						<option>No</option>
+						<option>Yes</option>
+					</select>
+				</label>
+				<br/>
 				<label>
 					Item type?
 					<select id="item-type">
@@ -249,6 +258,7 @@
 				var iType = document.getElementById("item-type").value
 				var lostTable = document.getElementById("lost-items").tBodies[0].rows
 				var foundTable = document.getElementById("found-items").tBodies[0].rows
+				var showFound = document.getElementById("show-found").value
 
 				/*Clear Previous Filters and then search*/
 				for (var i = lostTable.length - 1; i >= 0; i--) {
@@ -258,6 +268,9 @@
 					foundTable[i].className = ""
 				};
 
+				if( document.getElementById("show-found-apply").checked )
+					filterLostThatHaveBeenFound(showFound)
+				
 				filterType(iType)
 
 				var colorInputs = document.getElementsByName("colors")
@@ -275,6 +288,22 @@
 				if(currentClass.indexOf("hide") == -1 )
 					return desiredClass
 				return currentClass
+			}
+
+			function filterLostThatHaveBeenFound(yesNo){
+				var lostRows = document.getElementById("lost-items").tBodies[0].rows			
+				var lostFoundColumn = 10
+
+				for (var i = 0; i < lostRows.length; i++) {
+					var rowColors = lostRows[i].cells[lostFoundColumn].textContent.split(",")
+					
+
+					if ( lostRows[i].cells[lostFoundColumn].textContent == yesNo ) //no matches
+						lostRows[i].className = getHideClass(lostRows[i].className,"match")
+					else
+						lostRows[i].className = getHideClass(lostRows[i].className, "hide")
+					
+				};
 			}
 
 
@@ -327,7 +356,6 @@
 						foundRows[i].className = getHideClass(foundRows[i].className, "match")
 					
 				};
-
 			}
  
  			/* Filter by item type */
