@@ -4,11 +4,10 @@
 		<title>Lost And Found Colossal Con</title>
 
 		<style type="text/css">
-			body{
-				background-color: #eee;
-			}
 			table{
 				margin: 0 auto;
+				line-height: 1.4em;
+				background-color: #eee;
 			}
 			html,
 			body {
@@ -20,8 +19,14 @@
 			body {
 				font-family: sans-serif;
 				font-size: 12px;
-				line-height: 1.4em;
 				min-width: 600px;
+			}
+			header, section{
+				padding-left: 1em;
+				padding-right: 1em;
+			}
+			header{
+				
 			}
 			input[type="text"],
 			input[type="search"],
@@ -271,6 +276,26 @@
 					<input type="text" id="locations-other">
 				</fieldset>
 
+				<fieldset>
+					<legend>Which day was it lost</legend>
+					<label>
+						<input type="checkbox" name="day-lost" value="Thursday" />
+						Thursday
+					</label>
+					<label>
+						<input type="checkbox" name="day-lost" value="Friday" />
+						Friday
+					</label>
+					<label>
+						<input type="checkbox" name="day-lost" value="Saturday" />
+						Saturday
+					</label>
+					<label>
+						<input type="checkbox" name="day-lost" value="Sunday" />
+						Sunday
+					</label>
+				</fieldset>
+
 				<button id="search" type="button">Search</button>
 			</form>
 		</section>
@@ -328,6 +353,15 @@
 				};
 				if( locations.length > 0)
 					filterLocations(locations)
+
+				var dayLostInputs = document.getElementsByName("day-lost")
+				var dayLosts = []
+				for (var i = 0; i < dayLostInputs.length; i++) {
+					if( dayLostInputs[i].checked ) 
+						dayLosts.push( dayLostInputs[i].value )
+				};
+				if( dayLosts.length > 0)
+					filterByDayLost(dayLosts)
 			}
 
 			/* If it's not a match by some filter than toss it! */
@@ -337,6 +371,33 @@
 				if(currentClass == "match")
 					return currentClass
 				return desiredClass
+			}
+
+			function filterByDayLost(dayLosts){
+				var lostRows = document.getElementById("lost-items").tBodies[0].rows
+				var foundRows = document.getElementById("found-items").tBodies[0].rows
+
+				var lostLocationColumn = 8
+				var foundLocationColumn = 7
+
+				for (var i = 0; i < lostRows.length; i++) {
+					var cellDay = lostRows[i].cells[lostLocationColumn].textContent
+					if ( dayLosts.indexOf(cellDay) == -1 ) //no matches
+						lostRows[i].className = getHideClass(lostRows[i].className,"hide")
+					else
+						lostRows[i].className = getHideClass(lostRows[i].className, "match")
+				};
+				for (var i = 0; i < foundRows.length; i++) {
+					var cellDay = foundRows[i].cells[foundLocationColumn].textContent
+					if ( dayLosts.indexOf(cellDay) == -1 ) //no matches
+						foundRows[i].className = getHideClass(foundRows[i].className,"hide")
+					else
+						foundRows[i].className = getHideClass(foundRows[i].className, "match")
+					
+					
+				};
+
+
 			}
 
 			function filterLocations(locations){
@@ -365,8 +426,6 @@
 						lostRows[i].className = getHideClass(lostRows[i].className,"hide")
 					else
 						lostRows[i].className = getHideClass(lostRows[i].className, "match")
-					
-					
 				};
 				for (var i = 0; i < foundRows.length; i++) {
 					var location = foundRows[i].cells[foundLocationColumn].textContent
@@ -379,9 +438,7 @@
 					if ( locations.indexOf(location) == -1 ) //no matches
 						foundRows[i].className = getHideClass(foundRows[i].className,"hide")
 					else
-						foundRows[i].className = getHideClass(foundRows[i].className, "match")
-					
-					
+						foundRows[i].className = getHideClass(foundRows[i].className, "match")		
 				};
 			}
 
