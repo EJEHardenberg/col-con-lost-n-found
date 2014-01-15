@@ -184,24 +184,24 @@
 				<label title="Check the box to apply the filter">
 					<input type="checkbox" id="show-found-apply" />
 					Show list items marked as 
-					<select id="show-found">
-						<option>No</option>
-						<option>Yes</option>
-					</select>
 				</label>
+				<select id="show-found">
+					<option>No</option>
+					<option>Yes</option>
+				</select>
 				<br/>
 				<label>
 					<input type="checkbox" id="item-type-apply" />
 					Item type?
-					<select id="item-type">
-						<option>Other</option>
-						<option>Badge</option>
-						<option>Camera</option>
-						<option>Bag</option>
-						<option>Phone</option>
-						<option>Clothing</option>
-					</select>
 				</label>
+				<select id="item-type">
+					<option>Other</option>
+					<option>Badge</option>
+					<option>Camera</option>
+					<option>Bag</option>
+					<option>Phone</option>
+					<option>Clothing</option>
+				</select>
 
 				<fieldset>
 					<legend>Colors</legend>
@@ -264,6 +264,11 @@
 						<input type="checkbox" name="locations" value="Hallways">
 						Hallways
 					</label>
+					<label>
+						<input type="checkbox" name="locations" value="Other">
+						Other:
+					</label>
+					<input type="text" id="locations-other">
 				</fieldset>
 
 				<button id="search" type="button">Search</button>
@@ -327,9 +332,11 @@
 
 			/* If it's not a match by some filter than toss it! */
 			function getHideClass(currentClass, desiredClass){
-				if(currentClass.indexOf("hide") == -1 )
+				if(currentClass == desiredClass)
 					return desiredClass
-				return currentClass
+				if(currentClass == "match")
+					return currentClass
+				return desiredClass
 			}
 
 			function filterLocations(locations){
@@ -339,21 +346,41 @@
 				var lostLocationColumn = 6
 				var foundLocationColumn = 2
 
+				var otherSearch = locations.indexOf("Other") != -1;
+				var otherVal = document.getElementById("locations-other").value
+				
+				if(otherSearch)
+					delete locations[locations.indexOf("Other")]
+				
+
 				for (var i = 0; i < lostRows.length; i++) {
 					var location = lostRows[i].cells[lostLocationColumn].textContent
+					if(otherSearch){
+						if ( location.toUpperCase().search(otherVal.toUpperCase()) == -1 ) //no matches
+							lostRows[i].className = getHideClass(lostRows[i].className,"hide")
+						else
+							lostRows[i].className = getHideClass(lostRows[i].className, "match")
+					}
 					if ( locations.indexOf(location) == -1 ) //no matches
 						lostRows[i].className = getHideClass(lostRows[i].className,"hide")
 					else
 						lostRows[i].className = getHideClass(lostRows[i].className, "match")
 					
+					
 				};
 				for (var i = 0; i < foundRows.length; i++) {
 					var location = foundRows[i].cells[foundLocationColumn].textContent
-					
+					if(otherSearch){
+						if ( location.toUpperCase().search(otherVal.toUpperCase()) == -1 ) //no matches
+							foundRows[i].className = getHideClass(foundRows[i].className,"hide")
+						else
+							foundRows[i].className = getHideClass(foundRows[i].className, "match")
+					}
 					if ( locations.indexOf(location) == -1 ) //no matches
 						foundRows[i].className = getHideClass(foundRows[i].className,"hide")
 					else
 						foundRows[i].className = getHideClass(foundRows[i].className, "match")
+					
 					
 				};
 			}
