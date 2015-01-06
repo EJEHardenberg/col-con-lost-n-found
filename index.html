@@ -1,183 +1,81 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Lost And Found Colossal Con</title>
-
-		<style type="text/css">
-			table{
-				margin: 0 auto;
-				line-height: 1.4em;
-				background-color: #eee;
-			}
-			html,
-			body {
-				height: 100%;
-				margin: 0;
-				padding: 0;
-			}
-
-			body {
-				font-family: sans-serif;
-				font-size: 12px;
-				min-width: 600px;
-			}
-			header, section{
-				padding-left: 1em;
-				padding-right: 1em;
-			}
-			header{
-				
-			}
-			input[type="text"],
-			input[type="search"],
-			{
-				-moz-box-sizing: border-box;
-				-webkit-box-sizing: border-box;
-				-ms-box-sizing: border-box; /* ie8 only */
-				box-sizing: border-box;
-			}
-			input[type="checkbox"],
-			input[type="radio"] {
-				vertical-align: text-top;
-				padding: 0;
-				margin: 1px 0 0;
-			}
-			input,
-			select {
-				line-height: 15px;
-			}
-
-			a,
-			input[type="text"],
-			input[type="search"],
-			select,
-			div {
-				outline: 0;
-			}
-			input,
-			select {
-				margin: 1px;
-				padding: 3px;
-			}
-			#loadedLost, #loadedFound{
-				display: none;
-			}
-			/* Filter CSS */
-			.hide{
-				display: none;
-			}
-			.match{
-				display: table-row;
-			}
-			.widefat {
-				border-spacing: 0;
-				width: 100%;
-				clear: both;
-				margin: 0;
-			}
-			.widefat{
-				-webkit-border-radius: 3px;
-				border-radius: 3px;
-				border-width: 1px;
-				border-style: solid;
-			}
-
-			.widefat * {
-				word-wrap: break-word;
-			}
-
-			.widefat a {
-				text-decoration: none;
-			}
-
-			.widefat thead th:first-of-type {
-				-webkit-border-top-left-radius: 3px;
-				border-top-left-radius: 3px;
-			}
-			.widefat thead th:last-of-type {
-				-webkit-border-top-right-radius: 3px;
-				border-top-right-radius: 3px;
-			}
-			.widefat tfoot th:first-of-type {
-				-webkit-border-bottom-left-radius: 3px;
-				border-bottom-left-radius: 3px;
-			}
-			.widefat tfoot th:last-of-type {
-				-webkit-border-bottom-right-radius: 3px;
-				border-bottom-right-radius: 3px;
-			}
-
-			.widefat td,
-			.widefat th {
-				border-width: 1px 0;
-				border-style: solid;
-			}
-			.widefat tfoot th {
-				border-bottom: none;
-			}
-
-			.widefat .no-items td {
-				border-bottom-width: 0;
-			}
-
-			.widefat td {
-				font-size: 12px;
-				padding: 4px 7px 2px;
-				vertical-align: top;
-			}
-
-			.widefat td p,
-			.widefat td ol,
-			.widefat td ul {
-				font-size: 12px;
-			}
-
-			.widefat th {
-				padding: 7px 7px 8px;
-				text-align: left;
-				line-height: 1.3em;
-				font-size: 14px;
-			}
-
-			.widefat th input {
-				margin: 0 0 0 8px;
-				padding: 0;
-				vertical-align: text-top;
-			}
-
-			.widefat .check-column {
-				width: 2.2em;
-				padding: 6px 0 25px;
-				vertical-align: top;
-			}
-
-			.widefat tbody th.check-column {
-				padding: 9px 0 22px;
-			}
-
-			.widefat.media .check-column {
-				padding-top: 8px;
-			}
-
-			.widefat thead .check-column,
-			.widefat tfoot .check-column {
-				padding: 10px 0 0;
-			}
-
-		</style>
+		<title>Lost And Found</title>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-touch-fullscreen" content="yes">
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" type="text/css" href="flakes/css/all.css">
 	</head>
 
 	<body>
-		<header>
-			<h1>Lost &amp; Found Search Utility</h1>
-			<p>
-				Use the options below to search for an item based on its description. Click the two buttons below to load the data first though!
-			</p>
-			
-			<div>
-				<button id="load-lost">Load Data</button>	
+		<div class="flakes-frame">
+			<div class="flakes-navigation">
+				<a href="index.html" class="logo">
+					<h1>Lost &amp; Found</h1>
+				</a>
+
+				<ul>
+					<li class="title">Tools</li>
+					<li><a href="#">Search</a></li>
+					<li><a href="#">Manage Criteria</a></li>
+					<li><a href="#">Set location</a></li>
+					<li><a href="#">Lost Form</a></li>
+					<li><a href="#">Found Form</a></li>
+				</ul>
+
+				<p class="foot">
+					Utility provided by<br>
+					<a href="http://ethanjoachimeldridge.info/">Ethan J. Eldridge</a> &bullet; <a href="https://github.com/EdgeCaseBerg/col-con-lost-n-found">source code</a>
+				</p>
 			</div>
-		</header>
+
+			<div class="flakes-content">
+
+			<div class="flakes-mobile-top-bar">
+				<a href="" class="logo-wrap">
+					<img src="img/logo.png" height="30px">
+				</a>
+
+				<a href="" class="navigation-expand-target">
+					<img src="img/site-wide/navigation-expand-target.png" height="26px">
+				</a>
+			</div>
+
+			<div class="view-wrap">
+				<h1>How to use this tool</h1>
+				<p>
+					If you have any issues or find any bugs please report them to 
+					me on <a href="https://github.com/EdgeCaseBerg/col-con-lost-n-found">github here</a>
+				</p>
+				<ul>
+					<li><a href="#start">Where to start</a></li>
+					<li><a href="#lost-items">Submitting a lost item</a></li>
+					<li><a href="#found-items">Submitting a found item</a></li>
+					<li><a href="#searching">Searching the inventory</a></li>
+				</ul>	
+				<div>
+					<h2 id="start">Where to start</h2>
+					<p><!-- TODO: Fill out with screen shots and etc --></p>
+				</div>
+				<div>
+				<div>
+					<h2 id="lost-items">Submitting a lost item</h2>
+					<p><!-- TODO: Fill out with screen shots and etc --></p>
+				</div>
+				<div>
+					<h2 id="found-items">Submitting a found item</h2>
+					<p><!-- TODO: Fill out with screen shots and etc --></p>
+				</div>
+				<div>
+					<h2 id="searching">Searching the inventory</h2>
+					<p><!-- TODO: Fill out with screen shots and etc --></p>
+				</div>
+			</div>
+		</div>
+
+<!-- OLD STUFF BELOW HERE FOR NOW -->
 
 		<section>
 			<h2>Search Criteria</h2>
@@ -186,6 +84,9 @@
 			</p>
 			<form>
 				<!-- Search Options Here... enable once spreadsheet data loads -->
+				<label>
+					<input type="checkbox" id="features">
+				</label>
 				<label title="Check the box to apply the filter">
 					<input type="checkbox" id="show-found-apply" />
 					Show list items marked as 
@@ -680,5 +581,16 @@
 		    }
 
 		</script>
+		<link rel="stylesheet" type="text/css" href="flakes/bower_components/prism/themes/prism.css">
+        <link rel="stylesheet" type="text/css" href="flakes/bower_components/gridforms/gridforms/gridforms.css">
+
+        <script src="/flakes/bower_components/jquery/dist/jquery.js"></script>
+        <script src="/flakes/bower_components/snapjs/snap.js"></script>
+        <script src="/flakes/bower_components/responsive-elements/responsive-elements.js"></script>
+        <script src="/flakes/bower_components/gridforms/gridforms/gridforms.js"></script>
+
+        <script src="/flakes/js/base.js"></script>
+        <script src="/flakes/js/utils.js"></script>
+
 	</body>
 </html>
