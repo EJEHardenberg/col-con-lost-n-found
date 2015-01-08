@@ -1,7 +1,8 @@
-CREATE TABLE item (
+CREATE TABLE items (
 	id INT(20) NOT NULL auto_increment PRIMARY KEY, -- association id for foreign relationships to other tables
 	event_id INT(20) NOT NULL,
-	name VARCHAR(64), 
+	name VARCHAR(256), 
+	description TEXT,
 	is_found TINYINT(1), 
 	submitted_time TIMESTAMP, 
 	INDEX (`event_id`),
