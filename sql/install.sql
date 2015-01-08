@@ -16,4 +16,9 @@ select 'initializing features - start', now();
 source features.sql;
 select 'initializing features - done', now();
 
+select 'initializing item feature join table - start', now();
+source item_features.sql;
+select 'initializing item feature join table - done', now();
+
+
 select 'Installation complete';
