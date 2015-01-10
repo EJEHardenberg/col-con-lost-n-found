@@ -1,48 +1,8 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Lost And Found</title>
-		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-touch-fullscreen" content="yes">
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" type="text/css" href="flakes/css/all.css">
-	</head>
+<?php 
+$pageTitle = '- Welcome';
+include dirname(__FILE__) . '/shared/header.php';
 
-	<body>
-		<div class="flakes-frame">
-			<div class="flakes-navigation">
-				<a href="index.html" class="logo">
-					<h1>Lost &amp; Found</h1>
-				</a>
-
-				<ul>
-					<li class="title">Tools</li>
-					<li><a href="#">Search</a></li>
-					<li><a href="#">Manage Criteria</a></li>
-					<li><a href="#">Locations</a></li>
-					<li><a href="#">Lost Form</a></li>
-					<li><a href="#">Found Form</a></li>
-				</ul>
-
-				<p class="foot">
-					Utility provided by<br>
-					<a href="http://ethanjoachimeldridge.info/">Ethan J. Eldridge</a> &bullet; <a href="https://github.com/EdgeCaseBerg/col-con-lost-n-found">source code</a>
-				</p>
-			</div>
-
-			<div class="flakes-content">
-
-			<div class="flakes-mobile-top-bar">
-				<a href="" class="logo-wrap">
-					<img src="img/logo.png" height="30px">
-				</a>
-
-				<a href="" class="navigation-expand-target">
-					<img src="img/site-wide/navigation-expand-target.png" height="26px">
-				</a>
-			</div>
-
+?>
 			<div class="view-wrap">
 				<h1>How to use this tool</h1>
 				<p>
@@ -87,7 +47,7 @@
 					<p><!-- TODO: Fill out with screen shots and etc --></p>
 				</div>
 			</div>
-		</div>
+		</div><!-- end what was started in the header -->
 
 <!-- OLD STUFF BELOW HERE FOR NOW -->
 

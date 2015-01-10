@@ -45,14 +45,12 @@ class Feature extends Entity
 {
 	public $event_id = -1;
 	public $feature_type = -1;
-	public $item_id = -1;
 	public $name = '';	
 
 	function __construct()
 	{
 		$this->event_id = -1;
 		$this->feature_type = -1;
-		$this->item_id = -1;
 		$this->name = '';	
 	}
 	
