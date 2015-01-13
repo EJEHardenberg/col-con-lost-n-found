@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__) . '/php-util/init.php';
+require_once dirname(__FILE__) . '/../php-util/init.php';
 
 logMessage("Loading models", LOG_LVL_DEBUG);
 

@@ -1,9 +1,7 @@
 <?php
 $pageTitle = 'Search';
 include dirname(__FILE__) . '/shared/header.php';
-
-//todo: decide where actions post to and implement as neccesary	
-
+include dirname(__FILE__) . '/shared/core.php';
 ?>
 	<div class="view-wrap">
 		<h1>Manage Criteria</h1>
@@ -13,11 +11,17 @@ include dirname(__FILE__) . '/shared/header.php';
 					<form class="grid-form" method="post" action="#">
 						<fieldset>
 							<legend>Event</legend>
-						
 							<div data-row-span="1">
 								<div data-field-span="1">
 									<label>Name</label>
-									<input type="text">
+									<input name="name" type="text">
+								</div>
+							</div>
+							<div data-row-span="1">
+								<div data-field-span="1">
+									<label>Enabled
+										<input type="checkbox" checked name="enabled">
+									</label>
 								</div>
 							</div>
 							<input type="submit" value="Create" class="button-green bigger">
