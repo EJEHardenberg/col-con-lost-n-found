@@ -17,4 +17,8 @@ logMessage('Loading common functions', LOG_LVL_DEBUG);
 require_once $dir . '/functions.php';
 logMessage('Finished loading common functions', LOG_LVL_DEBUG);
 
+logMessage('Loading Services', LOG_LVL_DEBUG);
+require_once $dir . '/../services/EventService.php';
+logMessage('Finished loading services',LOG_LVL_DEBUG);
+
 logMessage('Core Libraries Loaded',LOG_LVL_DEBUG);
