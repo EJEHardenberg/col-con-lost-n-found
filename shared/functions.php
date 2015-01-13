@@ -15,3 +15,15 @@ function conditional_error_success($errMsg ='', $successMsg = '', $sectionType='
 		}
 	}
 }
+
+/* Ends the request if the server method isn't post, relys on global var $urlMappings
+ * $urlKeyForRedirect: the key to look up in the urlMappings for where to redirect
+ * $logMsg: message to log to note the event at LOG_LVL_DEBUG
+*/
+function is_post_action_only($urlKeyForRedirect, $logMsg='Invalid method sent to post only request') {
+	if ($_SERVER['REQUEST_METHOD'] != 'POST') { 	
+		logMessage($logMsg, LOG_LVL_DEBUG);
+		header('Location: ' . $urlMappings[$urlKeyForRedirect]['fail']);
+	    exit();
+	}
+}
