@@ -10,6 +10,13 @@ include dirname(__FILE__) . '/shared/core.php';
 				<div>
 					<form class="grid-form" method="post" action="#">
 						<fieldset>
+							<?php
+							conditional_error_success(
+								'There was an issue creating the event',
+								'Successfully created an event.',
+								'event'
+							);
+							?>
 							<legend>Event</legend>
 							<div data-row-span="1">
 								<div data-field-span="1">
@@ -33,6 +40,13 @@ include dirname(__FILE__) . '/shared/core.php';
 				<div>
 					<form class="grid-form" method="post" action="#">
 						<fieldset>
+							<?php
+							conditional_error_success(
+								'There was an issue creating the feature type',
+								'Successfully created a feature type.',
+								'feature-type'
+							);
+							?>
 							<legend>Feature Type</legend>
 							<div data-row-span="1">
 								<div data-field-span="1">
@@ -65,6 +79,13 @@ include dirname(__FILE__) . '/shared/core.php';
 			<div class="span-1">
 				<form class="grid-form" method="post" action="#">
 						<fieldset>
+							<?php
+							conditional_error_success(
+								'There was an issue creating the feature',
+								'Successfully created a feature.',
+								'feature'
+							);
+							?>
 							<legend>Feature</legend>
 							<div data-row-span="2">
 								<div data-field-span="1">
