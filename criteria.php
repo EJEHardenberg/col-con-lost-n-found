@@ -102,7 +102,7 @@ if ($featureTypes === false) {
 							conditional_error_success(
 								'There was an issue creating the feature',
 								'Successfully created a feature.',
-								'feature'
+								'create-feature'
 							);
 							?>
 							<legend>Feature</legend>

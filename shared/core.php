@@ -22,6 +22,10 @@ $urlMappings = array(
 	'update-feature-types' => array(
 		'fail' => '/criteria.php?e=1&s=update-feature-types#update-feature-types',
 		'success' => '/criteria.php?e=0&s=update-feature-types#update-feature-types',
+	),
+	'create-feature' => array(
+		'fail' => '/criteria.php?e=1&s=create-feature#create-feature',
+		'success' => '/criteria.php?e=0&s=create-feature#create-feature'
 	)
 );
 
