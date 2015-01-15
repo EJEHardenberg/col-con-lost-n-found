@@ -10,6 +10,8 @@ if ($events === false) {
 ?>
 	<div class="view-wrap">
 		<h1>Manage Criteria</h1>
+		<hr>
+		<h2>Create</h2>
 		<div class="grid-3 gutter-40">
 			<div class="span-1">
 				<div>
@@ -70,10 +72,10 @@ if ($events === false) {
 								</div>
 								<div data-field-span="1">
 									<label>
-										<input type="radio" checked name="is_[]">Multiple Choice
+										<input type="radio" checked name="is_[]" value="multi">Multiple Choice
 									</label>
 									<label>
-										<input type="radio" checked name="is_[]">Dropdown Option
+										<input type="radio" checked name="is_[]" value="dropdown">Dropdown Option
 									</label>
 								</div>
 							</div>
@@ -110,6 +112,52 @@ if ($events === false) {
 						</fieldset>
 						
 					</form>
+			</div>
+		</div>
+		<hr>
+		<h2>Update and Delete</h2>
+		<div class="grid-2 gutter-40">
+			<div class="span-1">
+				<fieldset>
+					<legend>Events</legend>
+					<?php if (empty($events)): ?>
+						<strong>No Events</strong>
+					<?php else: ?>
+						<p class="flakes-message information">
+							To delete an event check the left column
+						</p>
+						<form class="grid-form" method="post" action="#">
+							<table class="flakes-table" style="width:100%">
+								<colgroup>
+									<col span="1" style="width:20px">
+									<col span="1" style="width:80%">
+								</colgroup>
+								<thead>
+									<tr>
+								  		<td>X</td>
+										<td>Event Name</td>
+										<td>Enabled</td>
+									</tr>
+								</thead>
+								<tbody>
+									<?php foreach ($events as $event) : ?>
+										<tr>
+											<td><input name="delete[]" value="<?php echo $event->id ?>" type="checkbox" /></td>
+											<td><input name="name" value="<?php echo htmlentities($event->name); ?>" /></td>
+											<td><input name="enabled" <?php echo $event->enabled ? 'checked' : '';?> type="checkbox" /></td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
+							<input class="button-green" type="submit" value="Update">
+						</form>
+					<?php endif; ?>
+				</fieldset>
+			</div>
+			<div class="span-1">
+				<fieldset>
+					<legend>Feature Types &amp; Features</legend>
+				</fieldset>
 			</div>
 		</div>
 	</div>
