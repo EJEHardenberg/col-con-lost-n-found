@@ -22,7 +22,7 @@ $name = $_POST['name'];
 //keep going here later. todo
 $newEvent = EventService::createEvent($name,$enabled);
 
-if( get_class($newEvent) != 'Event' ) {
+if( $newEvent === false || get_class($newEvent) != 'Event' ) {
 	send_failure_redirect('create-event');
 }
 
