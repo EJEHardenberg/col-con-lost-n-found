@@ -7,7 +7,20 @@ $events = EventService::getEvents();
 if ($events === false) {
 	internal_error();
 }
+$eventNames = array();
+foreach ($events as $event) {
+	$eventNames[$event->id] = $event->name;
+}
+
 $featureTypes = FeatureTypeService::getFeatureTypes();
+if ($featureTypes === false) {
+	internal_error();
+}
+//Setup FeatureTypes with belonging features
+foreach ($featureTypes as $type) {
+	$type->features = array();
+}
+
 ?>
 	<div class="view-wrap">
 		<h1>Manage Criteria</h1>
@@ -76,7 +89,7 @@ $featureTypes = FeatureTypeService::getFeatureTypes();
 										<input type="radio" checked name="is_" value="multi">Multiple Choice
 									</label>
 									<label>
-										<input type="radio" checked name="is_" value="dropdown">Dropdown Option
+										<input type="radio" name="is_" value="dropdown">Dropdown Option
 									</label>
 								</div>
 							</div>
@@ -167,8 +180,61 @@ $featureTypes = FeatureTypeService::getFeatureTypes();
 			</div>
 			<div class="span-1">
 				<fieldset>
-					<legend>Feature Types &amp; Features</legend>
-
+						<legend>Feature Types</legend>
+						<form id="update-feature-type" method="post" action="#">
+							<table class="flakes-table" style="width:100%">
+								<colgroup>
+									<col span="1" style="width:20px">
+									<col span="1" style="width:10%">
+									<col span="1" style="width:80%">
+								</colgroup>
+								<thead>
+									<tr>
+										<td>X</td>
+										<td>Event</td>
+										<td>Feature Type</td>
+										<td>Is</td>
+									</tr>
+								</thead>
+								<tbody>
+										<?php foreach ($featureTypes as $featureType): ?>
+										<tr>
+											<td>
+												<input name="delete[]" value="<?php echo $featureType->id ?>" type="checkbox">
+											</td>
+											<td>
+												<input name="featureTypes[<?php echo $featureType->id ?>][id]" type="hidden" value="<?php echo $featureType->event_id ?>" />
+												<?php echo htmlentities($eventNames[$featureType->event_id]) ?>
+											</td>
+											<td>
+												<input 
+													type="text" 
+													value="<?php echo htmlentities($featureType->name); ?>" 
+													name="featureTypes[<?php echo $featureType->id ?>][name]"
+												/>
+											</td>
+											<td>
+												<label>
+													<input 
+														type="radio" 
+														<?php echo $featureType->is_multi ? 'checked' : ''; ?> 
+														name="featureTypes[<?php echo $featureType->id ?>][is_multi]" 
+														value="multi" />Multi
+												</label><br/>
+												<label>
+													<input 
+														type="radio" 
+														<?php echo $featureType->is_dropdown ? 'checked' : ''; ?> 
+														name="featureTypes[<?php echo $featureType->id ?>][is_dropdown]" 
+														value="dropdown">Dropdown
+												</label>
+											</td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
+						<input class="button-green" type="submit" value="Update">
+					</form>
 				</fieldset>
 			</div>
 		</div>
