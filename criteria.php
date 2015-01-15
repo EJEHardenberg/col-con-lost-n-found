@@ -2,6 +2,11 @@
 $pageTitle = 'Search';
 include dirname(__FILE__) . '/shared/header.php';
 include dirname(__FILE__) . '/shared/core.php';
+
+$events = EventService::getEvents();
+if ($events === false) {
+	internal_error();
+}
 ?>
 	<div class="view-wrap">
 		<h1>Manage Criteria</h1>
@@ -52,7 +57,9 @@ include dirname(__FILE__) . '/shared/core.php';
 								<div data-field-span="1">
 									<label>Event</label>
 									<select>
-										<!-- Populate with event, maybe use a cookie to keep track of preference or something -->
+										<?php foreach ($events as $event) : ?>
+											<option value="<?php echo $event->id ?>"><?php echo htmlentities($event->name); ?></option>
+										<?php endforeach; ?>
 									</select>
 								</div>
 							</div>
