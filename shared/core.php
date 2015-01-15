@@ -16,8 +16,8 @@ $urlMappings = array(
 		'success' => '/criteria.php?e=0&s=event-update#update-events'
 	),
 	'create-feature-type' => array(
-		'fail' => '/criteria.php?e=1&s=create-feature-type#create-feature-type',
-		'success' => '/criteria.php?e=0&s=create-feature-type#create-feature-type',
+		'fail' => '/criteria.php?e=1&s=feature-type#create-feature-type',
+		'success' => '/criteria.php?e=0&s=feature-type#create-feature-type',
 	)
 );
 
@@ -27,6 +27,7 @@ logMessage('Finished loading common functions', LOG_LVL_DEBUG);
 
 logMessage('Loading Services', LOG_LVL_DEBUG);
 require_once $dir . '/../services/EventService.php';
+require_once $dir . '/../services/FeatureTypeService.php';
 logMessage('Finished loading services',LOG_LVL_DEBUG);
 
 logMessage('Core Libraries Loaded',LOG_LVL_DEBUG);

@@ -23,4 +23,10 @@ $featureType->event_id = intval($_POST['event_id']);
 $featureType->is_multi = $_POST['is_'] == 'multi';
 $featureType->is_dropdown = $_POST['is_'] == 'dropdown';
 
-//continue here todo
+$created = FeatureTypeService::createFeatureType($featureType);
+
+if ($created === false) {
+	send_failure_redirect('create-feature-type');
+}
+
+send_success_redirect('create-feature-type');
