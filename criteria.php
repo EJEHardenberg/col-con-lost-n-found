@@ -128,6 +128,9 @@ if ($featureTypes === false) {
 		</div>
 		<hr>
 		<h2>Update and Delete</h2>
+		<p class="flakes-message information">
+			To delete an event check the left column
+		</p>
 		<div class="grid-2 gutter-40">
 			<div class="span-1">
 				<fieldset>
@@ -142,9 +145,6 @@ if ($featureTypes === false) {
 					<?php if (empty($events)): ?>
 						<strong>No Events</strong>
 					<?php else: ?>
-						<p class="flakes-message information">
-							To delete an event check the left column
-						</p>
 						<form id="update-events" class="grid-form" method="post" action="/actions/update-events.php">
 							<table class="flakes-table" style="width:100%">
 								<colgroup>
