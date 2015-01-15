@@ -46,4 +46,25 @@ class EventService extends StdClass {
 		}
 		return $allDeleted;
 	}
+
+	/* For validating input from $_POST */
+	public static function validateEventArray(Array $eventArray) {
+		if (!isset($eventArray['id']) || !isset($eventArray['name'])) {
+			return false;
+		}
+
+		if (!is_numeric($eventArray['id']) || empty($eventArray['name']) || strlen($eventArray['name']) > 64){
+			return false;
+		}
+
+		if (isset($eventArray['enabled']) && !$eventArray['enabled'] == 'true') {
+			return false;
+		}
+		return true;
+	}
+
+	public static function updateEvent(Event $event) {
+		$database = Database::instance();
+		return $database->update($event);
+	}
 }

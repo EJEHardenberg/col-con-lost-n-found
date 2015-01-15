@@ -8,12 +8,12 @@ require_once $dir . '/models.php';
 
 $urlMappings = array(
 	'create-event' => array(
-		'fail' => '/criteria.php?e=1&s=event',
-		'success' => '/criteria.php?e=0&s=event'
+		'fail' => '/criteria.php?e=1&s=event#create-event',
+		'success' => '/criteria.php?e=0&s=event#create-event'
 	),
 	'update-events' => array(
-		'fail' => '/criteria.php?e=1&s=event-update',
-		'success' => '/criteria.php?e=0&s=event-update'
+		'fail' => '/criteria.php?e=1&s=event-update#update-events',
+		'success' => '/criteria.php?e=0&s=event-update#update-events'
 	)
 );
 

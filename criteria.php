@@ -15,7 +15,7 @@ if ($events === false) {
 		<div class="grid-3 gutter-40">
 			<div class="span-1">
 				<div>
-					<form class="grid-form" method="post" action="/actions/create-event.php">
+					<form id="create-event" class="grid-form" method="post" action="/actions/create-event.php">
 						<fieldset>
 							<?php
 							conditional_error_success(
@@ -119,6 +119,13 @@ if ($events === false) {
 		<div class="grid-2 gutter-40">
 			<div class="span-1">
 				<fieldset>
+					<?php
+						conditional_error_success(
+							'There was an issue updating the events',
+							'Successfully updated list of events.',
+							'event-update'
+						);
+					?>
 					<legend>Events</legend>
 					<?php if (empty($events)): ?>
 						<strong>No Events</strong>
@@ -126,7 +133,7 @@ if ($events === false) {
 						<p class="flakes-message information">
 							To delete an event check the left column
 						</p>
-						<form class="grid-form" method="post" action="#">
+						<form id="update-events" class="grid-form" method="post" action="/actions/update-events.php">
 							<table class="flakes-table" style="width:100%">
 								<colgroup>
 									<col span="1" style="width:20px">
