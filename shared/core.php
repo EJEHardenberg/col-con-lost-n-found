@@ -36,6 +36,7 @@ logMessage('Finished loading common functions', LOG_LVL_DEBUG);
 logMessage('Loading Services', LOG_LVL_DEBUG);
 require_once $dir . '/../services/EventService.php';
 require_once $dir . '/../services/FeatureTypeService.php';
+require_once $dir . '/../services/FeatureService.php';
 logMessage('Finished loading services',LOG_LVL_DEBUG);
 
 logMessage('Core Libraries Loaded',LOG_LVL_DEBUG);
