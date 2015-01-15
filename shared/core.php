@@ -14,6 +14,10 @@ $urlMappings = array(
 	'update-events' => array(
 		'fail' => '/criteria.php?e=1&s=event-update#update-events',
 		'success' => '/criteria.php?e=0&s=event-update#update-events'
+	),
+	'create-feature-type' => array(
+		'fail' => '/criteria.php?e=1&s=create-feature-type#create-feature-type',
+		'success' => '/criteria.php?e=0&s=create-feature-type#create-feature-type',
 	)
 );
 

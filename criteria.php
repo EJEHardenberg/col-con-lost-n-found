@@ -45,7 +45,7 @@ if ($events === false) {
 			</div>
 			<div class="span-1">
 				<div>
-					<form class="grid-form" method="post" action="#">
+					<form class="grid-form" method="post" action="/actions/create-feature-type.php">
 						<fieldset>
 							<?php
 							conditional_error_success(
@@ -58,7 +58,7 @@ if ($events === false) {
 							<div data-row-span="1">
 								<div data-field-span="1">
 									<label>Event</label>
-									<select>
+									<select name="event_id">
 										<?php foreach ($events as $event) : ?>
 											<option value="<?php echo $event->id ?>"><?php echo htmlentities($event->name); ?></option>
 										<?php endforeach; ?>
@@ -68,14 +68,14 @@ if ($events === false) {
 							<div data-row-span="2">
 								<div data-field-span="1">
 									<label>Name</label>
-									<input type="text">
+									<input name="name" type="text">
 								</div>
 								<div data-field-span="1">
 									<label>
-										<input type="radio" checked name="is_[]" value="multi">Multiple Choice
+										<input type="radio" checked name="is_" value="multi">Multiple Choice
 									</label>
 									<label>
-										<input type="radio" checked name="is_[]" value="dropdown">Dropdown Option
+										<input type="radio" checked name="is_" value="dropdown">Dropdown Option
 									</label>
 								</div>
 							</div>
