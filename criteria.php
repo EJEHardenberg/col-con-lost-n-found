@@ -96,7 +96,7 @@ if ($featureTypes === false) {
 				</div>
 			</div>
 			<div class="span-1">
-				<form class="grid-form" method="post" action="#">
+				<form class="grid-form" method="post" action="/actions/create-feature.php">
 						<fieldset>
 							<?php
 							conditional_error_success(
@@ -117,7 +117,7 @@ if ($featureTypes === false) {
 								</div>
 								<div data-field-span="1">
 									<label>Name</label>
-									<input type="text">
+									<input name="name" type="text">
 								</div>
 							</div>
 							<input type="submit" class="button-green bigger" value="Create" />
