@@ -18,8 +18,6 @@ if (is_null($enabled)) {
 }
 
 $name = $_POST['name'];
-
-//keep going here later. todo
 $newEvent = EventService::createEvent($name,$enabled);
 
 if( $newEvent === false || get_class($newEvent) != 'Event' ) {
