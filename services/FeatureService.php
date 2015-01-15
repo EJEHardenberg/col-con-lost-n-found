@@ -8,4 +8,15 @@ class FeatureService extends StdClass {
 		return $database->insert($feature);
 	}
 
+	/* returns list of features, if featureType given list will be 
+	 * constrained to only features of that type.
+	*/
+	public static function getFeatures($featureType = null) {
+		$database = Database::instance();
+		if (is_null($featureType)) {
+			return $database->all(new Feature());
+		}
+		return is_numeric($featureType) ? $database->where(new Feature(), 'feature_type', $featureType) : array();
+	}
+
 }

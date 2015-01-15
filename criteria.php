@@ -17,6 +17,19 @@ if ($featureTypes === false) {
 	internal_error();
 }
 
+$featureTypeNames = array();
+foreach ($featureTypes as $featureType) {
+	$featureTypeNames[$featureType->id] = $featureType->name;
+}
+
+$features = FeatureService::getFeatures();
+function sortFeaturesByFeatureType($a, $b) {
+	return 	$a->feature_type == $b->feature_type ? 
+			0 : 
+			$a->feature_type < $b->feature_type ? -1 : 1;
+}
+usort($features, 'sortFeaturesByFeatureType');
+
 ?>
 	<div class="view-wrap">
 		<h1>Manage Criteria</h1>
@@ -240,6 +253,18 @@ if ($featureTypes === false) {
 						<input class="button-green" type="submit" value="Update">
 					</form>
 				</fieldset>
+			</div>
+		</div>
+		<div class="grid-1 gutter-40">
+			<div class="span-1">
+				<form>
+					<fieldset>
+						<legend>Features</legend>
+						<table>
+							<?php //todo loop feaures ?>
+						</table>
+					</fieldset>
+				</form>
 			</div>
 		</div>
 	</div>
