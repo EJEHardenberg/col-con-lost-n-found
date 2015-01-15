@@ -3,8 +3,6 @@ require_once dirname(__FILE__) . '/../shared/core.php';
 
 is_post_action_only('create-event','Invalid method sent to create-event');
 
-//todo: write service to create the event and create validations
-
 if( !isset($_POST['name']) || empty($_POST['name'])) {
 	send_failure_redirect('create-event');
 }
