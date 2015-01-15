@@ -20,7 +20,6 @@
 					<li class="title">Tools</li>
 					<li><a href="#">Search</a></li>
 					<li><a href="/criteria.php">Manage Criteria</a></li>
-					<li><a href="#">Locations</a></li>
 					<li><a href="#">Lost Form</a></li>
 					<li><a href="#">Found Form</a></li>
 				</ul>
