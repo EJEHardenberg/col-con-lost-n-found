@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__) . '/../shared/core.php';
 
-is_post_action_only('create-event','Invalid method sent to create-event');
+is_post_action_only('update-events','Invalid method sent to update-events');
 
 if (!isset($_POST['events']) || !is_array($_POST['events'])) {
 	send_failure_redirect('update-events');

@@ -20,13 +20,13 @@ include dirname(__FILE__) . '/shared/header.php';
 					<p>
 						This Lost &amp; Found tool is intended to assist at 
 						raves, conventions, and other events. To start, you'll 
-						need to <a href="locations.html">create an event location</a>. 
+						need to <a href="criteria.php">create an event location</a>. 
 					</p>
 					<p>
 						Once you've created a location, you can start defining 
 						properties of items that might get lost, this application 
 						comes with a few generic terms pre-defined, but you can 
-						add more using the <a href="criteria.html">Manage Criteria</a>
+						add more using the <a href="criteria.php">Manage Criteria</a>
 						page.
 					</p>
 					<p>
