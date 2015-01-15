@@ -23,4 +23,46 @@ class FeatureTypeService extends StdClass {
 		return $database->where(new FeatureType(), 'event_id', $event_id);
 	}
 
+	/* Returns true if all were deleted, false otherwise */
+	public static function deleteFeatureTypes(Array $arrayOfIds) {
+		$database = Database::instance();
+		$allDeleted = true;
+		foreach ($arrayOfIds as $id) {
+			if (is_numeric($id)) {
+				$toDel = new FeatureType();
+				$toDel->id = $id;
+				$allDeleted = $database->delete($toDel) && $allDeleted;
+			}
+		}
+		return $allDeleted;
+	}
+
+	/* For validating input from $_POST */
+	public static function validateFeatureTypeArray(Array $eventArray) {
+		if (!isset($eventArray['id']) 		|| 
+			!isset($eventArray['name']) 	|| 
+			!isset($eventArray['is_']) 		|| 
+			!isset($eventArray['event_id']) ){
+			return false;
+		}
+
+		if (!is_numeric($eventArray['id']) 			||  
+			!is_numeric($eventArray['event_id']) 	|| 
+			empty($eventArray['name']) 				|| 
+			strlen($eventArray['name']) > 64		){
+			return false;
+		}
+
+		if (!in_array($eventArray['is_'], array('multi','dropdown'))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public static function updateFeature(FeatureType $featureType) {
+		$database = Database::instance();
+		return $database->update($featureType);
+	}
+
 }
