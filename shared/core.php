@@ -10,6 +10,10 @@ $urlMappings = array(
 	'create-event' => array(
 		'fail' => '/criteria.php?e=1&s=event',
 		'success' => '/criteria.php?e=0&s=event'
+	),
+	'update-events' => array(
+		'fail' => '/criteria.php?e=1&s=event-update',
+		'success' => '/criteria.php?e=0&s=event-update'
 	)
 );
 

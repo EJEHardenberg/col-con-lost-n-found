@@ -143,8 +143,9 @@ if ($events === false) {
 									<?php foreach ($events as $event) : ?>
 										<tr>
 											<td><input name="delete[]" value="<?php echo $event->id ?>" type="checkbox" /></td>
-											<td><input name="name" value="<?php echo htmlentities($event->name); ?>" /></td>
-											<td><input name="enabled" <?php echo $event->enabled ? 'checked' : '';?> type="checkbox" /></td>
+											<input type="hidden" value="<?php echo $event->id ?>" name="events[<?php echo $event->id ?>][id]">
+											<td><input name="events[<?php echo $event->id ?>][name]" value="<?php echo htmlentities($event->name); ?>" /></td>
+											<td><input name="events[<?php echo $event->id ?>][enabled]" <?php echo $event->enabled ? 'checked' : '';?> type="checkbox" value="true" /></td>
 										</tr>
 									<?php endforeach; ?>
 								</tbody>

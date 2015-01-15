@@ -32,4 +32,18 @@ class EventService extends StdClass {
 		}
 		return $database->where(new Event(), 'enabled', $enabled === false ? '0' : '1' );
 	}
+
+	/* Returns true if all were deleted, false otherwise */
+	public static function deleteEvents(Array $arrayOfIds) {
+		$database = Database::instance();
+		$allDeleted = true;
+		foreach ($arrayOfIds as $id) {
+			if (is_numeric($id)) {
+				$toDel = new Event();
+				$toDel->id = $id;
+				$allDeleted = $database->delete($toDel) && $allDeleted;
+			}
+		}
+		return $allDeleted;
+	}
 }
