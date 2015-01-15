@@ -7,6 +7,7 @@ $events = EventService::getEvents();
 if ($events === false) {
 	internal_error();
 }
+$featureTypes = FeatureTypeService::getFeatureTypes();
 ?>
 	<div class="view-wrap">
 		<h1>Manage Criteria</h1>
@@ -100,7 +101,9 @@ if ($events === false) {
 								<div data-field-span="1">
 									<label>Type</label>
 									<select name="feature_type">
-										<!-- Populate With Feature types -->
+										<?php foreach ($featureTypes as $type): ?>
+											<option value="<?php echo $type->id ?>"><?php echo $type->name ?></option>
+										<?php endforeach; ?>
 									</select>
 								</div>
 								<div data-field-span="1">
@@ -165,6 +168,7 @@ if ($events === false) {
 			<div class="span-1">
 				<fieldset>
 					<legend>Feature Types &amp; Features</legend>
+
 				</fieldset>
 			</div>
 		</div>

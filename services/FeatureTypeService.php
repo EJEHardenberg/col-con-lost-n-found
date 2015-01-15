@@ -12,4 +12,15 @@ class FeatureTypeService extends StdClass {
 		return $database->insert($featureType);
 	}
 
+	/* If passed nothing, returns ALL feature types, if passed an event
+	 * id then only the feature types for that event will be given
+	*/
+	public static function getFeatureTypes($event_id = null) {
+		$database = Database::instance();
+		if (is_null($event_id)) {
+			return $database->all(new FeatureType());
+		}
+		return $database->where(new FeatureType(), 'event_id', $event_id);
+	}
+
 }
