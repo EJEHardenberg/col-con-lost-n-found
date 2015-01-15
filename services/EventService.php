@@ -13,7 +13,7 @@ class EventService extends StdClass {
 	/* Will return false on failures, object with id on success
 	*/
 	public static function createEvent($eventName, $enabled) {
-		if (!validateName($eventName)) {
+		if (!self::validateName($eventName)) {
 			return false;
 		}
 		$database = Database::instance();

@@ -8,7 +8,7 @@ include dirname(__FILE__) . '/shared/core.php';
 		<div class="grid-3 gutter-40">
 			<div class="span-1">
 				<div>
-					<form class="grid-form" method="post" action="#">
+					<form class="grid-form" method="post" action="/actions/create-event.php">
 						<fieldset>
 							<?php
 							conditional_error_success(
@@ -27,7 +27,7 @@ include dirname(__FILE__) . '/shared/core.php';
 							<div data-row-span="1">
 								<div data-field-span="1">
 									<label>Enabled
-										<input type="checkbox" checked name="enabled">
+										<input type="checkbox" checked name="enabled" value="true">
 									</label>
 								</div>
 							</div>

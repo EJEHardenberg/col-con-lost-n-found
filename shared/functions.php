@@ -1,5 +1,7 @@
 <?php
 
+
+logMessage("Loading functions.php", LOG_LVL_DEBUG);
 /* Shows an error or success message based on GET params
  * $errMsg: the error message to show
  * $successMsg: the success message to show
@@ -17,11 +19,13 @@ function conditional_error_success($errMsg ='', $successMsg = '', $sectionType='
 }
 
 function send_success_redirect($urlKeyForRedirect) {
+	global $urlMappings;
 	header('Location: ' . $urlMappings[$urlKeyForRedirect]['success']);
 	exit();
 }
 
 function send_failure_redirect($urlKeyForRedirect) {
+	global $urlMappings;
 	header('Location: ' . $urlMappings[$urlKeyForRedirect]['fail']);
 	exit();
 }
@@ -36,3 +40,5 @@ function is_post_action_only($urlKeyForRedirect, $logMsg='Invalid method sent to
 		send_failure_redirect($urlKeyForRedirect);	
 	}
 }
+
+logMessage("Finished loading functions.php", LOG_LVL_DEBUG);
