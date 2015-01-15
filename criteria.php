@@ -16,10 +16,6 @@ $featureTypes = FeatureTypeService::getFeatureTypes();
 if ($featureTypes === false) {
 	internal_error();
 }
-//Setup FeatureTypes with belonging features
-foreach ($featureTypes as $type) {
-	$type->features = array();
-}
 
 ?>
 	<div class="view-wrap">
@@ -181,7 +177,14 @@ foreach ($featureTypes as $type) {
 			<div class="span-1">
 				<fieldset>
 						<legend>Feature Types</legend>
-						<form id="update-feature-type" method="post" action="#">
+						<?php
+							conditional_error_success(
+								'There was an issue updating the feature types',
+								'Successfully updated list of feature types.',
+								'update-feature-types'
+							);
+						?>
+						<form id="update-feature-types" method="post" action="/actions/update-feature-types.php">
 							<table class="flakes-table" style="width:100%">
 								<colgroup>
 									<col span="1" style="width:20px">
@@ -200,10 +203,11 @@ foreach ($featureTypes as $type) {
 										<?php foreach ($featureTypes as $featureType): ?>
 										<tr>
 											<td>
+												<input name="featureTypes[<?php echo $featureType->id ?>][id]" type="hidden" value="<?php echo $featureType->id ?>" />
 												<input name="delete[]" value="<?php echo $featureType->id ?>" type="checkbox">
 											</td>
 											<td>
-												<input name="featureTypes[<?php echo $featureType->id ?>][id]" type="hidden" value="<?php echo $featureType->event_id ?>" />
+												<input name="featureTypes[<?php echo $featureType->id ?>][event_id]" type="hidden" value="<?php echo $featureType->event_id ?>" />
 												<?php echo htmlentities($eventNames[$featureType->event_id]) ?>
 											</td>
 											<td>
@@ -218,14 +222,14 @@ foreach ($featureTypes as $type) {
 													<input 
 														type="radio" 
 														<?php echo $featureType->is_multi ? 'checked' : ''; ?> 
-														name="featureTypes[<?php echo $featureType->id ?>][is_multi]" 
+														name="featureTypes[<?php echo $featureType->id ?>][is_]" 
 														value="multi" />Multi
 												</label><br/>
 												<label>
 													<input 
 														type="radio" 
 														<?php echo $featureType->is_dropdown ? 'checked' : ''; ?> 
-														name="featureTypes[<?php echo $featureType->id ?>][is_dropdown]" 
+														name="featureTypes[<?php echo $featureType->id ?>][is_]" 
 														value="dropdown">Dropdown
 												</label>
 											</td>
