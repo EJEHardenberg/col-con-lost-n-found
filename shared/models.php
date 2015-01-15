@@ -29,7 +29,6 @@ class FeatureType extends Entity
 
 class Feature extends Entity
 {
-	public $event_id = -1;
 	public $feature_type = -1;
 	public $name = '';		
 }
