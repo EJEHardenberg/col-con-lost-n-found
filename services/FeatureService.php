@@ -19,4 +19,17 @@ class FeatureService extends StdClass {
 		return is_numeric($featureType) ? $database->where(new Feature(), 'feature_type', $featureType) : array();
 	}
 
+	public static function deleteFeatures(Array $featureIds) {
+		$database = Database::instance();
+		$allDeleted = true;
+		foreach ($featureIds as $id) {
+			if (is_numeric($id)) {
+				$toDel = new Feature();
+				$toDel->id = $id;
+				$allDeleted = $database->delete($toDel) && $allDeleted;
+			}
+		}
+		return $allDeleted;
+	}
+
 }
