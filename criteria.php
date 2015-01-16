@@ -295,7 +295,7 @@ usort($features, 'sortFeaturesByFeatureType');
 										<td>
 											<input 
 												type="hidden" 
-												name="features[<?php echo $feature->id ?>][feature_id]" 
+												name="features[<?php echo $feature->id ?>][id]" 
 												value="<?php echo $feature->id ?>"
 											/>
 											<input 
