@@ -257,7 +257,7 @@ usort($features, 'sortFeaturesByFeatureType');
 		</div>
 		<div class="grid-1 gutter-40">
 			<div class="span-1">
-				<form>
+				<form method="POST" id="update-features" action="/actions/update-features.php">
 					<fieldset>
 						<legend>Features</legend>
 						<table class="flakes-table" style="width:100%">
