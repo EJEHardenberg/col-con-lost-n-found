@@ -260,19 +260,37 @@ usort($features, 'sortFeaturesByFeatureType');
 				<form>
 					<fieldset>
 						<legend>Features</legend>
-						<table>
+						<table class="flakes-table" style="width:100%">
 							<colgroup>
 									<col span="1" style="width:20px">
-									<col span="1" style="width:10%">
 									<col span="1" style="width:80%">
 								</colgroup>
 							<thead>
 								<th>X</th>
-								<th>Type</th>
 								<th>Name</th>
 							</thead>
 							<tbody>
+								<?php 
+									if (!empty($features)) {
+										$currentlyShowing = $features[0]->feature_type; 
+										$i = 0;
+									}
+								?>
 								<?php foreach ($features as $feature) : ?>
+									<?php 
+										if($i == 0  || $currentlyShowing != $feature->feature_type) {
+											$currentlyShowing = $feature->feature_type;
+											?>
+											<tr>
+												<td colspan="2">
+													<strong>Feature Type:</strong> <?php echo $featureTypeNames[$currentlyShowing] ?>
+												</td>
+											</tr>
+											<?php
+											
+											$i++;
+										}
+									?>
 									<tr>
 										<td>
 											<input 
@@ -280,16 +298,16 @@ usort($features, 'sortFeaturesByFeatureType');
 												name="features[<?php echo $feature->id ?>][feature_id]" 
 												value="<?php echo $feature->id ?>"
 											/>
-											<input type="checkbox" name="delete[]" value="<?php echo $feature->id ?>">
-										</td>
-										<td>
 											<input 
 												type="hidden" 
 												name="features[<?php echo $feature->id ?>][feature_id]" 
 												value="<?php echo $feature->feature_type ?>" 
 											/>
-											<?php echo $featureTypeNames[$feature->feature_type]; ?>
-										</td>
+											<label>
+												<input type="checkbox" name="delete[]" value="<?php echo $feature->id ?>">
+												Delete
+											</label>
+										</td>										
 										<td>
 											<input 
 												type="text"
@@ -301,6 +319,7 @@ usort($features, 'sortFeaturesByFeatureType');
 								<?php endforeach; ?>
 							</tbody>
 						</table>
+						<input class="button-green" type="submit" value="Update">
 					</fieldset>
 				</form>
 			</div>
