@@ -206,10 +206,10 @@ usort($features, 'sortFeaturesByFeatureType');
 								</colgroup>
 								<thead>
 									<tr>
-										<td>X</td>
-										<td>Event</td>
-										<td>Feature Type</td>
-										<td>Is</td>
+										<th>X</th>
+										<th>Event</th>
+										<th>Feature Type</th>
+										<th>Is</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -261,7 +261,45 @@ usort($features, 'sortFeaturesByFeatureType');
 					<fieldset>
 						<legend>Features</legend>
 						<table>
-							<?php //todo loop feaures ?>
+							<colgroup>
+									<col span="1" style="width:20px">
+									<col span="1" style="width:10%">
+									<col span="1" style="width:80%">
+								</colgroup>
+							<thead>
+								<th>X</th>
+								<th>Type</th>
+								<th>Name</th>
+							</thead>
+							<tbody>
+								<?php foreach ($features as $feature) : ?>
+									<tr>
+										<td>
+											<input 
+												type="hidden" 
+												name="features[<?php echo $feature->id ?>][feature_id]" 
+												value="<?php echo $feature->id ?>"
+											/>
+											<input type="checkbox" name="delete[]" value="<?php echo $feature->id ?>">
+										</td>
+										<td>
+											<input 
+												type="hidden" 
+												name="features[<?php echo $feature->id ?>][feature_id]" 
+												value="<?php echo $feature->feature_type ?>" 
+											/>
+											<?php echo $featureTypeNames[$feature->feature_type]; ?>
+										</td>
+										<td>
+											<input 
+												type="text"
+												name="features[<?php echo $feature->id ?>][name]" 
+												value="<?php echo $feature->name ?>"
+											>
+										</td>
+									</tr>
+								<?php endforeach; ?>
+							</tbody>
 						</table>
 					</fieldset>
 				</form>
