@@ -46,7 +46,7 @@ foreach ($_POST['features'] as $featureArray) {
 	$oldFeature = $oldFeatures[$feature->id]);
 	if ($oldFeature->name != $feature->name 				|| 
 		$oldFeature->feature_type != $feature->feature_type ){
-		//todo update
+		$allUpdated = false !== FeatureService::updateFeature($feature) && $allUpdated;
 	}
 
 }

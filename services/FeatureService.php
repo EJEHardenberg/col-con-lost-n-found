@@ -32,4 +32,9 @@ class FeatureService extends StdClass {
 		return $allDeleted;
 	}
 
+	public static function updateFeature(Feature $feature) {
+		$database = Database::instance();
+		return $database->update($feature);
+	}
+
 }
