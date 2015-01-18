@@ -43,7 +43,7 @@ foreach ($_POST['features'] as $featureArray) {
 		continue;
 	}
 
-	$oldFeature = $oldFeatures[$feature->id]);
+	$oldFeature = $oldFeatures[$feature->id];
 	if ($oldFeature->name != $feature->name 				|| 
 		$oldFeature->feature_type != $feature->feature_type ){
 		$allUpdated = false !== FeatureService::updateFeature($feature) && $allUpdated;
