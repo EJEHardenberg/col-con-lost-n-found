@@ -11,7 +11,7 @@ if (!isset($_POST['features']) || !is_array($_POST['features'])) {
 if (isset($_POST['delete']) && is_array($_POST['delete'])) {
 	$allDeleted = FeatureService::deleteFeatures($_POST['delete']);
 	if (!$allDeleted) {
-		send_failure_redirect('update-events');
+		send_failure_redirect('update-features');
 	}
 }
 
@@ -52,7 +52,7 @@ foreach ($_POST['features'] as $featureArray) {
 }
 
 if (!$allUpdated) {
-	send_failure_redirect('update-events');
+	send_failure_redirect('update-features');
 }
 
-send_success_redirect('update-events');
+send_success_redirect('update-features');
