@@ -260,14 +260,23 @@ usort($features, 'sortFeaturesByFeatureType');
 				<form method="POST" id="update-features" action="/actions/update-features.php">
 					<fieldset>
 						<legend>Features</legend>
+						<?php
+							conditional_error_success(
+								'There was an issue updating the features',
+								'Successfully updated list of features.',
+								'update-features'
+							);
+						?>
 						<table class="flakes-table" style="width:100%">
 							<colgroup>
 									<col span="1" style="width:20px">
 									<col span="1" style="width:80%">
+									<col span="1" style="width:20%">
 								</colgroup>
 							<thead>
 								<th>X</th>
 								<th>Name</th>
+								<th>Type</th>
 							</thead>
 							<tbody>
 								<?php 
@@ -298,11 +307,6 @@ usort($features, 'sortFeaturesByFeatureType');
 												name="features[<?php echo $feature->id ?>][id]" 
 												value="<?php echo $feature->id ?>"
 											/>
-											<input 
-												type="hidden" 
-												name="features[<?php echo $feature->id ?>][feature_type]" 
-												value="<?php echo $feature->feature_type ?>" 
-											/>
 											<label>
 												<input type="checkbox" name="delete[]" value="<?php echo $feature->id ?>">
 												Delete
@@ -314,6 +318,13 @@ usort($features, 'sortFeaturesByFeatureType');
 												name="features[<?php echo $feature->id ?>][name]" 
 												value="<?php echo $feature->name ?>"
 											>
+										</td>
+										<td>
+											<select name="features[<?php echo $feature->id ?>][feature_type]" >
+												<?php foreach ($featureTypes as $featureType): ?>
+													<option value="<?php echo $featureType->id ?>" <?php echo $featureType->id == $feature->feature_type ? 'selected' : '' ?>><?php echo htmlentities($featureType->name) ?></option>
+												<?php endforeach; ?>
+											</select>
 										</td>
 									</tr>
 								<?php endforeach; ?>
