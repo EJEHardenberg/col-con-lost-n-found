@@ -1,5 +1,5 @@
 <?php
-$pageTitle = 'Search';
+$pageTitle = 'Manage Criteria';
 include dirname(__FILE__) . '/shared/header.php';
 include dirname(__FILE__) . '/shared/core.php';
 
