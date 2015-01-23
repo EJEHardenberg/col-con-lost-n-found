@@ -263,7 +263,8 @@ usort($features, 'sortFeaturesByFeatureType');
 						<?php
 							conditional_error_success(
 								'There was an issue updating the features',
-								'Successfully updated list of features.',
+								'Successfully updated list of features.
+								ting',
 								'update-features'
 							);
 						?>
