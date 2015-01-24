@@ -8,16 +8,41 @@ include dirname(__FILE__) . '/shared/core.php';
 */
 $event_id = 1; //todo: replace with query based arg
 $featureTypes = FeatureTypeService::getFeatureTypes($event_id);
+
 ?>
 	<div class="view-wrap">
 		<h1>Lost Form</h1>
 		<hr>
 		<div>
-			<?php
-			foreach ($featureTypes as $key => $featureType) {
-				include 'shared/featuretypeform.php';
-			}
-			?>
+			<form method="POST" action="#" class="grid-form">		
+				<h2>Describe what you saw</h2>
+				<p>
+					By filling out what features the item you lost has, we'll 
+					be able to better search our database and help you find it!
+				</p>
+				<fieldset>
+					<legend>General</legend>
+					<div data-row-span="1">
+						<div data-field-span="1">
+							<label>Name of item</label>
+							<input type="text" name="name"> 
+						</div>
+					</div>
+					<div data-row-span="1">
+						<div data-field-span="1">
+							<label>Description</label>
+							<textarea name="description"></textarea>
+						</div>
+					</div>
+				</fieldset>
+				<?php
+				foreach ($featureTypes as $key => $featureType) {
+					$features = FeatureService::getFeatures($featureType->id);
+					include 'shared/featuretypeform.php';
+				}
+				?>
+				<input type="submit" class="button-green button-bigger">
+			</form>
 		</div>
 	</div>
 
