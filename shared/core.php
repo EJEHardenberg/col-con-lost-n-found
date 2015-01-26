@@ -30,6 +30,10 @@ $urlMappings = array(
 	'update-features' => array(
 		'fail' => '/criteria.php?e=1&s=update-features#update-features',
 		'success' => '/criteria.php?e=0&s=update-features#update-features'	
+	),
+	'report-item-lost' => array(
+		'fail' => '/lost.php?e=1&s=report-lost#report-lost',
+		'success' => '/lost.php?e=0&s=report-lost#report-lost'		
 	)
 );
 
@@ -41,6 +45,7 @@ logMessage('Loading Services', LOG_LVL_DEBUG);
 require_once $dir . '/../services/EventService.php';
 require_once $dir . '/../services/FeatureTypeService.php';
 require_once $dir . '/../services/FeatureService.php';
+require_once $dir . '/../services/ItemService.php';
 logMessage('Finished loading services',LOG_LVL_DEBUG);
 
 logMessage('Core Libraries Loaded',LOG_LVL_DEBUG);

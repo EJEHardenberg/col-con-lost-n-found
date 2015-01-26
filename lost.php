@@ -14,7 +14,16 @@ $featureTypes = FeatureTypeService::getFeatureTypes($event_id);
 		<h1>Lost Form</h1>
 		<hr>
 		<div>
-			<form method="POST" action="#" class="grid-form">		
+			<form method="POST" action="/actions/report-item.php" class="grid-form" id="report-lost">	
+				<?php
+				conditional_error_success(
+					'There was an issue creating the record of the lost item',
+					'Successfully submitted a lost item.',
+					'report-lost'
+				);
+				?>	
+				<input type="hidden" name="is_found" value="false" />
+				<input type="hidden" name="event_id" value="<?php echo $event_id ?>" />
 				<h2>Describe what you saw</h2>
 				<p>
 					By filling out what features the item you lost has, we'll 
