@@ -137,14 +137,13 @@ usort($features, 'sortFeaturesByFeatureType');
 						</fieldset>
 						
 					</form>
-			</div>
 		</div>
 		<hr>
 		<h2>Update and Delete</h2>
 		<p class="flakes-message information">
-			To delete an event check the left column
+			To delete an event,feature type, or feature check the leftmost column
 		</p>
-		<div class="grid-2 gutter-40">
+		<div class="grid-3 gutter-40">
 			<div class="span-1">
 				<fieldset>
 					<?php
@@ -168,7 +167,6 @@ usort($features, 'sortFeaturesByFeatureType');
 									<tr>
 								  		<td>X</td>
 										<td>Event Name</td>
-										<td>Enabled</td>
 									</tr>
 								</thead>
 								<tbody>
@@ -176,8 +174,14 @@ usort($features, 'sortFeaturesByFeatureType');
 										<tr>
 											<td><input name="delete[]" value="<?php echo $event->id ?>" type="checkbox" /></td>
 											<input type="hidden" value="<?php echo $event->id ?>" name="events[<?php echo $event->id ?>][id]">
-											<td><input name="events[<?php echo $event->id ?>][name]" value="<?php echo htmlentities($event->name); ?>" /></td>
-											<td><input name="events[<?php echo $event->id ?>][enabled]" <?php echo $event->enabled ? 'checked' : '';?> type="checkbox" value="true" /></td>
+											<td>
+												<input 	name="events[<?php echo $event->id ?>][name]"
+													value="<?php echo htmlentities($event->name); ?>" />
+												<br>
+												<label>Enabled
+													<input name="events[<?php echo $event->id ?>][enabled]" <?php echo $event->enabled ? 'checked' : '';?> type="checkbox" value="true" />
+												</label>
+											</td>
 										</tr>
 									<?php endforeach; ?>
 								</tbody>
@@ -187,7 +191,7 @@ usort($features, 'sortFeaturesByFeatureType');
 					<?php endif; ?>
 				</fieldset>
 			</div>
-			<div class="span-1">
+			<div class="span-2">
 				<fieldset>
 						<legend>Feature Types</legend>
 						<?php
