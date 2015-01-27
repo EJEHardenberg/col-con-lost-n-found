@@ -14,7 +14,7 @@ $featureTypes = FeatureTypeService::getFeatureTypes($event_id);
 
 ?>
 	<div class="view-wrap">
-		<h1>Lost Form</h1>
+		<h1>Report Item</h1>
 		<hr>
 		<div>
 			<form method="POST" action="/actions/report-item.php" class="grid-form" id="report-item">	
