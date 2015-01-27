@@ -35,7 +35,26 @@ include dirname(__FILE__) . '/shared/header.php';
 				<div>
 				<div>
 					<h2 id="report-items">Reporting an item</h2>
-					<p><!-- TODO: Fill out with screen shots and etc --></p>
+					<p>
+						To report an item (lost or found), navigate to
+						the <a href="report-item.php">Report page</a>
+						and fill out the form.  
+					</p>
+					<img src="/images/lost.png" width="600px" />
+					<p>
+						If you have access to the server configuration
+						files, you can shut off the sidebar navigation
+						on the page via the REPORT_ITEM_NO_BAR define.
+						Setting this to true will remove the sidebar. 
+						If you don't have access, contact your system
+						administrator.
+					</p>
+					<p>
+						In most web browsers, the page can be maximized
+						via the F11 key. Doing this with no sidebar will
+						give your form a more kiosk-like appearance. For
+						most users this will likely be desireable.
+					</p>
 				</div>
 				<div>
 					<h2 id="searching">Searching the inventory</h2>
