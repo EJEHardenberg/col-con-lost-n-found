@@ -11,8 +11,7 @@ include dirname(__FILE__) . '/shared/header.php';
 				</p>
 				<ul>
 					<li><a href="#start">Where to start</a></li>
-					<li><a href="#lost-items">Submitting a lost item</a></li>
-					<li><a href="#found-items">Submitting a found item</a></li>
+					<li><a href="#report-items">Reporting an item</a></li>
 					<li><a href="#searching">Searching the inventory</a></li>
 				</ul>	
 				<div>
@@ -35,11 +34,7 @@ include dirname(__FILE__) . '/shared/header.php';
 				</div>
 				<div>
 				<div>
-					<h2 id="lost-items">Submitting a lost item</h2>
-					<p><!-- TODO: Fill out with screen shots and etc --></p>
-				</div>
-				<div>
-					<h2 id="found-items">Submitting a found item</h2>
+					<h2 id="report-items">Reporting an item</h2>
 					<p><!-- TODO: Fill out with screen shots and etc --></p>
 				</div>
 				<div>
