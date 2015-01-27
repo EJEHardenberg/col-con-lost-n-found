@@ -20,5 +20,10 @@ class ItemService extends StdClass {
 			)
 		);
 	}
+	
+	public static function getItems() { 
+		$database = Database::instance();
+		return $database->all(new Item());
+	}
 
 } 
