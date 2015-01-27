@@ -60,3 +60,4 @@ $featureTypes = FeatureTypeService::getFeatureTypes($event_id);
 	</div>
 
 </div>
+<link rel="stylesheet" type="text/css" href="flakes/bower_components/gridforms/gridforms/gridforms.css">
