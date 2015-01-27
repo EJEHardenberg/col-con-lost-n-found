@@ -1,8 +1,11 @@
 <?php
-$pageTitle = 'Lost Form';
-include dirname(__FILE__) . '/shared/header.php';
+$pageTitle = 'Report Item';
 include dirname(__FILE__) . '/shared/core.php';
-
+if (defined('REPORT_ITEM_NO_BAR') && REPORT_ITEM_NO_BAR == true) {
+	include dirname(__FILE__) . '/shared/header-no-bar.php';
+} else {
+	include dirname(__FILE__) . '/shared/header.php';
+}
 /* Get the feature types and features and construct a decent looking form
  * to display a submission form for lost things.
 */
@@ -61,3 +64,12 @@ $featureTypes = FeatureTypeService::getFeatureTypes($event_id);
 
 </div>
 <link rel="stylesheet" type="text/css" href="flakes/bower_components/gridforms/gridforms/gridforms.css">
+<?php 
+/* If we are in no sidebar mode, then widen the content area */
+if (REPORT_ITEM_NO_BAR) : ?>
+	<style>
+		.flakes-frame .flakes-content {
+			width: 100%;
+		}
+	</style>
+<?php endif; ?>
