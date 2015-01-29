@@ -19,6 +19,7 @@
 				<ul>
 					<li class="title">Tools</li>
 					<li><a href="#">Search</a></li>
+					<li><a href="/inventory.php">Inventory</a></li>
 					<li><a href="/criteria.php">Manage Criteria</a></li>
 					<li><a href="/report-item.php">Report Item</a></li>
 				</ul>
