@@ -14,6 +14,18 @@ foreach ($events as $event) {
 				<h1>Inventory Management</h1>
 				<p>
 				</p>
+				<div id="inventory-search">
+					<form method="POST" action="/actions/text-search.php">
+						<div class="flakes-search">
+							<input class="search-box search" placeholder="Search Items by Title/Description" autofocus="">
+						</div>
+						<div class="flakes-actions-bar">
+							<a class="action button-gray smaller right" href="/search.php">Advanced Search</a>
+							<a class="action button-gray smaller right" href="/criteria.php">Edit Criteria</a>
+							<input type="submit" class="action button-gray smaller right" value="Search">
+						</div>
+					</form>
+				</div>
 				<!-- Table andd all those wonderful things here -->
 				<form method="POST" action="/actions/update-items.php"  class="grid-form">
 					<?php
