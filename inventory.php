@@ -3,20 +3,28 @@ $pageTitle = 'Inventory';
 include dirname(__FILE__) . '/shared/header.php';
 include dirname(__FILE__) . '/shared/core.php'; 
 
-$items = ItemService::getItems()
+$items = ItemService::getItems();
+$events = EventService::getEvents();
+$eventsById = array();
+foreach ($events as $event) {
+	$eventsById[$event->id] = $event;
+}
 ?>
 			<div class="view-wrap">
 				<h1>Inventory Management</h1>
 				<p>
 				</p>
 				<!-- Table andd all those wonderful things here -->
+				<form method="POST" action="/actions/delete-items.php"  class="grid-form">
 				<table class="flakes-table">
 					<colgroup>
+						<col span="1" style="20px">
 						<col span="1" style="20px">
 						<col span="1" style="20%">
 					</colgroup>
 					<thead>
 						<tr>
+							<th></th>
 							<th>Event</th>
 							<th>Name</th>
 							<th>Found</th>
@@ -27,7 +35,8 @@ $items = ItemService::getItems()
 					<tbody>
 						<?php foreach ($items as $item) : ?>
 							<tr>
-								<td><?php echo $item->event_id; //todo put out name ?></td>
+								<td><input type="checkbox" name="delete[]" value="<?php echo $item->id ?>"></td>
+								<td><?php echo $eventsById[$item->event_id]->name; ?></td>
 								<td><?php echo $item->name; ?></td>
 								<td><?php echo $item->is_found ? 'Found' : 'Lost'; ?></td>
 								<td><?php echo date('m/d/Y', $item->submitted_time); ?></td>
@@ -35,5 +44,7 @@ $items = ItemService::getItems()
 						<?php endforeach; ?>
 					</tbody>
 				</table>
+					<input type="submit" class="button-red" value="Delete Selected" > 
+				</form>
 			</div>
 		</div><!-- ends header started div. -->
