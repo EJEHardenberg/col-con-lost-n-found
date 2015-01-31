@@ -26,4 +26,23 @@ class ItemService extends StdClass {
 		return $database->all(new Item());
 	}
 
+	public static function deleteitems(Array $itemIds) {
+		$database = Database::instance();
+		$allDeleted = true;
+		foreach ($itemIds as $id) {
+			if (is_numeric($id)) {
+				$toDel = new Item();
+				$toDel->id = $id;
+				$allDeleted = $database->delete($toDel) && $allDeleted;
+			}
+		}
+		return $allDeleted;
+	}
+
+	/* T | F */
+	public static function updateItem(Item $item) {
+		$database = Database::instance();
+		return $database->update($item) !== false;
+	}
+
 } 
