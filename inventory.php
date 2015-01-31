@@ -15,7 +15,7 @@ foreach ($events as $event) {
 				<p>
 				</p>
 				<!-- Table andd all those wonderful things here -->
-				<form method="POST" action="/actions/delete-items.php"  class="grid-form">
+				<form method="POST" action="/actions/update-items.php"  class="grid-form">
 				<table class="flakes-table">
 					<colgroup>
 						<col span="1" style="20px">
@@ -38,7 +38,14 @@ foreach ($events as $event) {
 								<td><input type="checkbox" name="delete[]" value="<?php echo $item->id ?>"></td>
 								<td><?php echo $eventsById[$item->event_id]->name; ?></td>
 								<td><?php echo $item->name; ?></td>
-								<td><?php echo $item->is_found ? 'Found' : 'Lost'; ?></td>
+								<td><label>
+									<input 
+										type="checkbox" 
+										<?php echo $item->is_found ? 'checked' : '' ?> 
+										name="is_found[]" 
+										value="<?php echo $item->id ?>">
+									</label> is found
+								</td>
 								<td><?php echo date('m/d/Y', $item->submitted_time); ?></td>
 							</tr>
 						<?php endforeach; ?>
