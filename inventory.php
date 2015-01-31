@@ -46,7 +46,7 @@ foreach ($events as $event) {
 										value="<?php echo $item->id ?>">
 									</label> is found
 								</td>
-								<td><?php echo date('m/d/Y', $item->submitted_time); ?></td>
+								<td><?php echo date('m/d/Y', strtotime($item->submitted_time)); ?></td>
 							</tr>
 						<?php endforeach; ?>
 					</tbody>
