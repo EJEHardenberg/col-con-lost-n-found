@@ -1,9 +1,20 @@
 <?php
-$pageTitle = 'Inventory';
-include dirname(__FILE__) . '/shared/header.php';
+$pageTitle = 'Search Results';
 include dirname(__FILE__) . '/shared/core.php'; 
 
-$items = ItemService::getItems();
+is_post_action_only('text-search','Please use the inventory form to search');
+
+if (!isset($_POST['search_term']) || empty($_POST['search_term'])) {
+	send_failure_redirect('text-search');
+}
+
+/* Get search results */
+$searchTerm = $_POST['search_term'];
+
+include dirname(__FILE__) . '/shared/header.php';
+
+
+$items = ItemService::textSearchForItems($searchTerm);
 $events = EventService::getEvents();
 $eventsById = array();
 foreach ($events as $event) {
@@ -17,7 +28,7 @@ foreach ($events as $event) {
 				<div id="inventory-search">
 					<form method="POST" action="/search.php">
 						<div class="flakes-search">
-							<input class="search-box search" name="search_term" placeholder="Search Items by Title/Description" autofocus="">
+							<input class="search-box search" placeholder="Search Items by Title/Description" autofocus="">
 						</div>
 						<div class="flakes-actions-bar">
 							<a class="action button-gray smaller right" href="/search.php">Advanced Search</a>

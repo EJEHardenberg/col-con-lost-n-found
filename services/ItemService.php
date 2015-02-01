@@ -45,4 +45,16 @@ class ItemService extends StdClass {
 		return $database->update($item) !== false;
 	}
 
+	public static function textSearchForItems($searchTerm) {
+		//todo: decide whether or not to do exact or fuzzy search when it comes to spaces and stop words, etc
+		$database = Database::instance();
+		return $database->custom(
+			'SELECT * from items WHERE name LIKE :name or description LIKE :desc',
+			array(
+				':name' => '%' . $searchTerm . '%',
+				':desc' => '%' . $searchTerm . '%'
+			)
+		);
+	}
+
 } 

@@ -38,6 +38,10 @@ $urlMappings = array(
 	'update-items' => array(
 		'fail' => '/inventory.php?e=1&s=update-items',
 		'success' => '/inventory.php?e=0&s=update-items'
+	),
+	'text-search' => array(
+		'fail' => '/inventory.php?e=1&s=text-search',
+		'success' => '/inventory.php?e=1&s=text-search'
 	)
 );
 
