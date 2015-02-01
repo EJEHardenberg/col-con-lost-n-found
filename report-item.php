@@ -9,7 +9,12 @@ if (defined('REPORT_ITEM_NO_BAR') && REPORT_ITEM_NO_BAR == true) {
 /* Get the feature types and features and construct a decent looking form
  * to display a submission form for lost things.
 */
-$event_id = 1; //todo: replace with query based arg
+$event_id = isset($_GET['event_id']) 
+	? (is_numeric($_GET['event_id']) 
+		? intval($_GET['event_id'])
+		: 1
+	  ) 
+	: 1; //default to 1
 $featureTypes = FeatureTypeService::getFeatureTypes($event_id);
 
 ?>
