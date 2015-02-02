@@ -32,8 +32,8 @@ $urlMappings = array(
 		'success' => '/criteria.php?e=0&s=update-features#update-features'	
 	),
 	'report-item' => array(
-		'fail' => '/report-item.php?e=1&s=report-item#report-item',
-		'success' => '/report-item.php?e=0&s=report-item#report-item'		
+		'fail' => '/report-item.php?e=1&s=report-item',
+		'success' => '/report-item.php?e=0&s=report-item'		
 	),
 	'update-items' => array(
 		'fail' => '/inventory.php?e=1&s=update-items',

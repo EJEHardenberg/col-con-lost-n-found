@@ -18,15 +18,15 @@ function conditional_error_success($errMsg ='', $successMsg = '', $sectionType='
 	}
 }
 
-function send_success_redirect($urlKeyForRedirect) {
+function send_success_redirect($urlKeyForRedirect, $queryParams = '') {
 	global $urlMappings;
-	header('Location: ' . $urlMappings[$urlKeyForRedirect]['success']);
+	header('Location: ' . $urlMappings[$urlKeyForRedirect]['success'] . $queryParams);
 	exit();
 }
 
-function send_failure_redirect($urlKeyForRedirect) {
+function send_failure_redirect($urlKeyForRedirect, $queryParams = '') {
 	global $urlMappings;
-	header('Location: ' . $urlMappings[$urlKeyForRedirect]['fail']);
+	header('Location: ' . $urlMappings[$urlKeyForRedirect]['fail'] . $queryParams);
 	exit();
 }
 

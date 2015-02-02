@@ -15,6 +15,10 @@ $event_id = isset($_GET['event_id'])
 		: 1
 	  ) 
 	: 1; //default to 1
+$eventExists = EventService::eventExists($event_id);
+if (!$eventExists) {
+	die('That Event Does Not Exist');
+}
 $featureTypes = FeatureTypeService::getFeatureTypes($event_id);
 
 ?>

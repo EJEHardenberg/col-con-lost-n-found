@@ -67,4 +67,12 @@ class EventService extends StdClass {
 		$database = Database::instance();
 		return $database->update($event);
 	}
+
+	/* T | F */
+	public static function eventExists($id) { 
+		$database = Database::instance();
+		$event = new Event();
+		$event->id = $id;
+		return $database->get($event) !== false;
+	}
 }

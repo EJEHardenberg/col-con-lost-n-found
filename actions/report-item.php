@@ -7,15 +7,18 @@ if (!isset($_POST['event_id']) || !is_numeric($_POST['event_id'])) {
 	send_failure_redirect('report-item');
 }
 
+$event_id =  intval($_POST['event_id']); 
+//todo: use event id in query param on redirect
+$reportItemRedirectParams = '&event_id=' . $event_id;
+
 if (!isset($_POST['name']) || empty($_POST['name'])) {
-	send_failure_redirect('report-item');
+	send_failure_redirect('report-item', $reportItemRedirectParams);
 }
 
 if (!isset($_POST['features']) || !is_array($_POST['features']) || count($_POST['features']) == 0) {
-	send_failure_redirect('report-item');
+	send_failure_redirect('report-item', $reportItemRedirectParams);
 }
 
-$event_id =  intval($_POST['event_id']);
 $name = $_POST['name'];
 $description = $_POST['description'];
 $is_found = !isset($_POST['is_found']) ? false : ($_POST['is_found'] == 'true');
@@ -30,7 +33,7 @@ $item->submitted_time = date('c');
 
 $madeItem = ItemService::createItem($item);
 if ($madeItem === false) {
-	send_failure_redirect('report-item');
+	send_failure_redirect('report-item', $reportItemRedirectParams);
 }
 
 $allSuccess = true;
@@ -44,6 +47,6 @@ foreach ($_POST['features'] as $feature_id) {
 }
 
 if ($allSuccess) {
-	send_success_redirect('report-item');
+	send_success_redirect('report-item', $reportItemRedirectParams);
 }
-send_failure_redirect('report-item');
+send_failure_redirect('report-item', $reportItemRedirectParams);
