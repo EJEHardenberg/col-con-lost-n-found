@@ -21,7 +21,11 @@
 					<li><a href="#">Search</a></li>
 					<li><a href="/inventory.php">Inventory</a></li>
 					<li><a href="/criteria.php">Manage Criteria</a></li>
-					<li><a href="/report-item.php">Report Item</a></li>
+					<?php 
+					$events = EventService::getEvents();
+					foreach ($events as $event): ?>
+						<li><a href="/report-item.php?event_id=<?php echo $event->id ?>">Report Item (<?php echo htmlentities($event->name) ?>)</a></li>
+					<?php endforeach; ?>
 				</ul>
 
 				<p class="foot">
