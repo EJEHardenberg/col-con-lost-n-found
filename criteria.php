@@ -1,7 +1,7 @@
 <?php
 $pageTitle = 'Manage Criteria';
-include dirname(__FILE__) . '/shared/header.php';
 include dirname(__FILE__) . '/shared/core.php';
+include dirname(__FILE__) . '/shared/header.php';
 
 $events = EventService::getEvents();
 if ($events === false) {

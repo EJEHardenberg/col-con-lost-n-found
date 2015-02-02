@@ -1,7 +1,7 @@
 <?php
 $pageTitle = 'Inventory';
-include dirname(__FILE__) . '/shared/header.php';
 include dirname(__FILE__) . '/shared/core.php'; 
+include dirname(__FILE__) . '/shared/header.php';
 
 $items = ItemService::getItems();
 $events = EventService::getEvents();
