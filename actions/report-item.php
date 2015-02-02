@@ -8,7 +8,6 @@ if (!isset($_POST['event_id']) || !is_numeric($_POST['event_id'])) {
 }
 
 $event_id =  intval($_POST['event_id']); 
-//todo: use event id in query param on redirect
 $reportItemRedirectParams = '&event_id=' . $event_id;
 
 if (!isset($_POST['name']) || empty($_POST['name'])) {
