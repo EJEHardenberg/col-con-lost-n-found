@@ -57,4 +57,38 @@ class ItemService extends StdClass {
 		);
 	}
 
+	public static function getItemById($itemId) {
+		$database = Database::instance();
+		$item = new Item();
+		$item->id = $itemId;
+		return $database->get($item);
+	}
+
+	public static function getFeaturesOfItem(Item $item) {
+		$database = Database::instance();
+		$features = $database->custom(
+			'SELECT f.* FROM features f JOIN item_feature ifs ON f.id = ifs.feature_id WHERE ifs.item_id = :itemId',
+			array(
+				':itemId' => $item->getId()
+			)
+		);
+		/* Translate the arrays into a Class */
+		if ($features === false) {
+			logMessage('Could not retrieve features for [Item: ' .$item->getId() .']' ,LOG_LVL_WARN);
+			return array();
+		}
+
+		$featuresList = array();
+		foreach ($features as $featureArr) {
+			$feature = new Feature();
+			$feature->id = $featureArr->id;
+			$feature->name = $featureArr->name;
+			$feature->feature_type = $featureArr->feature_type;
+			$featuresList[] = $feature;
+		}
+
+		return $featuresList;
+		
+	}
+
 } 
