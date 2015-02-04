@@ -59,7 +59,19 @@ include dirname(__FILE__) . '/shared/header.php';
 				</div>
 				<div>
 					<h2 id="searching">Searching the inventory</h2>
-					<p><!-- TODO: Fill out with screen shots and etc --></p>
+					<p>
+						The <a href="/inventory.php">inventory screen</a> 
+						is where you can perform simple text searches 
+						against the name and description of the various
+						items. 
+					</p>
+					<img src="/images/inventory.png" width="600px">
+					<p>
+						When you are in this screen, or the search results 
+						screen, click an item name to be taken to the 
+						item's page.
+					</p>
+					<img src="/images/item.png" width="600px">
 				</div>
 			</div>
 		</div><!-- end what was started in the header -->
