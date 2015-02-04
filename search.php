@@ -67,7 +67,11 @@ foreach ($events as $event) {
 							<tr>
 								<td><input type="checkbox" name="delete[]" value="<?php echo $item->id ?>"></td>
 								<td><?php echo $eventsById[$item->event_id]->name; ?></td>
-								<td><?php echo $item->name; ?></td>
+								<td>
+									<a href="/item.php?id=<?php echo $item->id ?>">
+										<?php echo $item->name; ?>
+									</a>
+								</td>
 								<td><label>is found &nbsp;
 									<input type="hidden" name="items[<?php echo $item->id; ?>][id]" value="<?php echo $item->id; ?>" />
 									<input 
