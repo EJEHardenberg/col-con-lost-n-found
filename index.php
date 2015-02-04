@@ -1,5 +1,6 @@
 <?php 
 $pageTitle = '- Welcome';
+include dirname(__FILE__) . '/shared/core.php';
 include dirname(__FILE__) . '/shared/header.php';
 
 ?>
