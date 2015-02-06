@@ -31,7 +31,7 @@ foreach ($events as $event) {
 							<input class="search-box search" placeholder="Search Items by Title/Description" autofocus="">
 						</div>
 						<div class="flakes-actions-bar">
-							<a class="action button-gray smaller right" href="/search.php">Advanced Search</a>
+							<a class="action button-gray smaller right" href="/advsearch.php">Advanced Search</a>
 							<a class="action button-gray smaller right" href="/criteria.php">Edit Criteria</a>
 							<input type="submit" class="action button-gray smaller right" value="Search">
 						</div>
