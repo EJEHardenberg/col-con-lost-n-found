@@ -20,13 +20,18 @@ foreach ($features as $feature) {
 	$partionedFeatures[$feature->feature_type][] = $feature;
 }
 
-
 ?>
 	<div class="view-wrap">
 		<h1>Advanced Search</h1>
 		<p>
-			Search via the individual features that the item has
-		</p>
+			Search via the individual features that an item has
+		</p><?php
+switch ($_SERVER['REQUEST_METHOD']) {
+	case 'POST':
+		/* Process the form */
+		break;
+	default:
+?>
 		<div id="inventory-search">
 			<form method="POST" action="/advsearch.php"  class="grid-form">
 				<h2>General</h2>
@@ -46,7 +51,6 @@ foreach ($features as $feature) {
 								<?php foreach ($featureList as $feature): ?>
 									<li>
 										<label>
-										
 										<?php echo $feature->name ?>
 										<input type="checkbox" value="<?php echo $feature->id ?>" name="features[]">
 									</li>
@@ -65,3 +69,6 @@ foreach ($features as $feature) {
 			</form>
 		</div>
 	</div>
+<?php 
+	break; //end default
+} //end switch ?>
