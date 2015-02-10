@@ -77,8 +77,19 @@ include dirname(__FILE__) . '/shared/header.php';
 				<div>
 					<h2 id="advsearch">Advanced Search</h2>
 					<p>
-						
+						If the text search on name and description fields
+						is not enough to find an item, you can use the 
+						advanced search page to find items with specific 
+						features. 
 					</p>
+					<img src="/images/advsearch.png" width="600px">
+					<p>
+						This can be helpful since someone may mark down 
+						the colors (for example) of an object while 
+						describing specifics that doesn't fit your precreated 
+						features in the description.
+					</p>
+					
 				</div>
 			</div>
 		</div><!-- end what was started in the header -->
