@@ -28,14 +28,29 @@ foreach ($features as $feature) {
 		</p><?php
 switch ($_SERVER['REQUEST_METHOD']) {
 	case 'POST':
+		$limit = null;
+		if ( isset($_POST['limit']) ) {
+			if ($_POST['limit'] != 'none') {
+				$limit = $_POST['limit'] == 'found' ? true : false;	
+			}
+		}
 		$items = array();
 		$searchTerm = isset($_POST['search_term']) ? $_POST['search_term'] : '';
 		if (!empty($searchTerm)) {
 			$textItems = ItemService::textSearchForItems($searchTerm);	
 			if ($textItems !== false) {
-				$items = array_merge($items, $textItems);
+				if (is_null($limit)) {
+					$items = array_merge($items, $textItems);	
+				} else {
+					foreach ($textItems as $item) {
+						if ($item->is_found == $limit) {
+							$items[] = $item;
+						}
+					}
+				}
 			}
 		}
+
 
 		$featuresList = isset($_POST['features']) ? 
 			is_array($_POST['features']) ? $_POST['features'] : array()
@@ -45,12 +60,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
 			/* Catch any non numerics and ignore them */
 			foreach ($featuresList as $id) {
 				if (is_numeric($id)) {
-					$ids[] = $id;
+					$ids[] = intval($id);
 				}
 			}
 
 			if (!empty($ids)) {
-				$featureItems = ItemService::itemsByFeatureIds($ids);
+				$featureItems = ItemService::itemsByFeatureIds($ids, $limit);
 				if ($featureItems !== false) {
 					$items = array_merge($items, $featureItems);
 				}
@@ -67,6 +82,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
 				<h2>General</h2>
 				<div class="flakes-search">
 					<input class="search-box search" name="search_term" placeholder="Title/Description" autofocus="">
+					<h3>Limit to </h3>
+						<select name="limit">
+							<option value="none">No limit</option>
+							<option value="found">Found Items  Only</option>
+							<option value="lost">Lost Items Only</option>
+						</select>
+					
 				</div>
 				<h2>Features</h2>
 				<div class="grid-3 gutter-40">

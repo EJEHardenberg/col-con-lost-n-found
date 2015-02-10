@@ -57,10 +57,14 @@ class ItemService extends StdClass {
 		);
 	}
 
-	public static function itemsByFeatureIds(Array $ids) {
+	public static function itemsByFeatureIds(Array $ids, $isFoundFilter = null) {
 		$database = Database::instance();
+		$sql = 'SELECT i.* FROM items i LEFT JOIN item_feature ifs ON ifs.item_id = i.id WHERE ifs.feature_id IN (:ids)';
+		if (!is_null($isFoundFilter)) {
+			$sql .= ' AND i.is_found = ' . ($isFoundFilter === true ? '1' : '0');
+		}
 		return $database-> custom(
-			'SELECT i.* FROM items i LEFT JOIN item_feature ifs ON ifs.item_id = i.id WHERE ifs.feature_id IN (:ids)',
+			$sql,
 			array(
 				':ids' => implode($ids,',')
 			)
