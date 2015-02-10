@@ -49,10 +49,20 @@ class ItemService extends StdClass {
 		//todo: decide whether or not to do exact or fuzzy search when it comes to spaces and stop words, etc
 		$database = Database::instance();
 		return $database->custom(
-			'SELECT * from items WHERE name LIKE :name or description LIKE :desc',
+			'SELECT * FROM items WHERE name LIKE :name or description LIKE :desc',
 			array(
 				':name' => '%' . $searchTerm . '%',
 				':desc' => '%' . $searchTerm . '%'
+			)
+		);
+	}
+
+	public static function itemsByFeatureIds(Array $ids) {
+		$database = Database::instance();
+		return $database-> custom(
+			'SELECT i.* FROM items i LEFT JOIN item_feature ifs ON ifs.item_id = i.id WHERE ifs.feature_id IN (:ids)',
+			array(
+				':ids' => implode($ids,',')
 			)
 		);
 	}

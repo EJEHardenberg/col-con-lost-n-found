@@ -28,7 +28,37 @@ foreach ($features as $feature) {
 		</p><?php
 switch ($_SERVER['REQUEST_METHOD']) {
 	case 'POST':
-		/* Process the form */
+		$items = array();
+		$searchTerm = isset($_POST['search_term']) ? $_POST['search_term'] : '';
+		if (!empty($searchTerm)) {
+			$textItems = ItemService::textSearchForItems($searchTerm);	
+			if ($textItems !== false) {
+				$items = array_merge($items, $textItems);
+			}
+		}
+
+		$featuresList = isset($_POST['features']) ? 
+			is_array($_POST['features']) ? $_POST['features'] : array()
+			: array();
+		if (!empty($featuresList)) {
+			$ids = array();
+			/* Catch any non numerics and ignore them */
+			foreach ($featuresList as $id) {
+				if (is_numeric($id)) {
+					$ids[] = $id;
+				}
+			}
+
+			if (!empty($ids)) {
+				$featureItems = ItemService::itemsByFeatureIds($ids);
+				if ($featureItems !== false) {
+					$items = array_merge($items, $featureItems);
+				}
+			}
+		}
+
+		print '<pre>'; print_r($items);
+		 
 		break;
 	default:
 ?>
@@ -36,7 +66,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 			<form method="POST" action="/advsearch.php"  class="grid-form">
 				<h2>General</h2>
 				<div class="flakes-search">
-					<input class="search-box search" placeholder="Title/Description" autofocus="">
+					<input class="search-box search" name="search_term" placeholder="Title/Description" autofocus="">
 				</div>
 				<h2>Features</h2>
 				<div class="grid-3 gutter-40">
