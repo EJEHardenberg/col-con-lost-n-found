@@ -4,6 +4,10 @@ include dirname(__FILE__) . '/shared/core.php';
 include dirname(__FILE__) . '/shared/header.php';
 
 $events = EventService::getEvents();
+$eventsById = array();
+foreach ($events as $event) {
+	$eventsById[$event->id] = $event;
+}
 $featureTypes = FeatureTypeService::getFeatureTypes();
 $features = FeatureService::getFeatures();
 
@@ -71,9 +75,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
 				}
 			}
 		}
-
-		print '<pre>'; print_r($items);
-		 
+		?>
+		<a href="/advsearch.php" class="action button-gray smaller right">Back to Adv. Search</a>
+		<?php 
+		include dirname(__FILE__) . '/shared/inventory-list.php';  
 		break;
 	default:
 ?>
