@@ -14,4 +14,4 @@ Installing is simple:
 5. Run up apache and see the index page for instructions. 
 
 
-[read this post]:www.ethanjoachimeldridge.info/tech-blog/lost-found
+[read this post]:http://www.ethanjoachimeldridge.info/tech-blog/lost-found
